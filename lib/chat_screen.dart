@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'signup_screen.dart';
+
 const Color _panel = Color(0xFFFFFFFF);
 const Color _border = Color(0xFFE8E8EA);
 const Color _text = Color(0xFF2B2B2E);
@@ -25,12 +27,12 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _panel,
-      body: const Column(
+      body: Column(
         children: [
           _Header(),
-          Divider(height: 1, thickness: 1, color: _border),
-          Expanded(child: _ChatList()),
-          _InputBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          const Expanded(child: _ChatList()),
+          const _InputBar(),
         ],
       ),
     );
@@ -49,17 +51,33 @@ class _Header extends StatelessWidget {
         children: [
           const _Hamburger(),
           Row(
-            children: const [
+            children: [
               _HeaderButton(
                 label: 'Sign in',
-                background: Color(0xFFECECEE),
+                background: const Color(0xFFECECEE),
                 foreground: _dark,
+                onTap: () {
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      const SnackBar(
+                        content: Text('Halaman Sign In belum tersedia'),
+                      ),
+                    );
+                },
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               _HeaderButton(
                 label: 'Register',
                 background: _dark,
                 foreground: Colors.white,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const SignUpScreen(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -100,26 +118,31 @@ class _HeaderButton extends StatelessWidget {
     required this.label,
     required this.background,
     required this.foreground,
+    this.onTap,
   });
 
   final String label;
   final Color background;
   final Color foreground;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontSize: 13.5,
-          fontWeight: FontWeight.w600,
-          color: foreground,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+        decoration: BoxDecoration(
+          color: background,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 13.5,
+            fontWeight: FontWeight.w600,
+            color: foreground,
+          ),
         ),
       ),
     );
