@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-const Color _pageBg = Color(0xFFEEF0F2);
 const Color _panel = Color(0xFFFFFFFF);
 const Color _border = Color(0xFFE8E8EA);
 const Color _text = Color(0xFF2B2B2E);
@@ -25,43 +24,14 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _pageBg,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 12),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: _panel,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x1A14141E),
-                  blurRadius: 40,
-                  offset: Offset(0, 16),
-                ),
-                BoxShadow(
-                  color: Color(0x0D14141E),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: SizedBox(
-                width: 360,
-                child: Column(
-                  children: const [
-                    _Header(),
-                    Divider(height: 1, thickness: 1, color: _border),
-                    Expanded(child: _ChatList()),
-                    _InputBar(),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+      backgroundColor: _panel,
+      body: const Column(
+        children: [
+          _Header(),
+          Divider(height: 1, thickness: 1, color: _border),
+          Expanded(child: _ChatList()),
+          _InputBar(),
+        ],
       ),
     );
   }
