@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ai_student_assistant/main.dart';
+import 'package:ai_student_assistant/signup_screen.dart';
 
 void main() {
   testWidgets('Chat screen renders', (WidgetTester tester) async {
@@ -9,9 +10,12 @@ void main() {
 
     expect(find.text('Sign in'), findsOneWidget);
     expect(find.text('Register'), findsOneWidget);
-    expect(find.textContaining('Hey Flippy!'), findsOneWidget);
-    expect(find.textContaining('Typescript code block'), findsOneWidget);
+    expect(find.text('Student Assistant'), findsOneWidget);
+    expect(find.text('New Chat'), findsOneWidget);
+    expect(find.byType(AppLogo), findsOneWidget);
     expect(find.text('What would you like to know?'), findsOneWidget);
+    expect(find.byIcon(Icons.mic_none), findsNothing);
+    expect(find.textContaining('Hey Flippy!'), findsNothing);
   });
 
   testWidgets('Register opens signup screen', (WidgetTester tester) async {

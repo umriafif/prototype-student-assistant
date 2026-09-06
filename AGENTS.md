@@ -12,10 +12,10 @@ Flutter app (Dart) — "AI Student Assistant". Scaffolded with `flutter create`;
 ## Structure
 
 - `lib/main.dart` — entrypoint; `AIStudentAssistantApp` (MaterialApp) → `ChatScreen`. No state management or service layer yet; keep simple until architecture is decided.
-- `lib/chat_screen.dart` — chat UI (the current home). Header has `Register`/`Sign in` pill buttons that push `SignUpScreen` / `SignInScreen`. All UI is static; code block is tokenized mock content (`_codeLines`), not a real AI response.
+- `lib/chat_screen.dart` — chat UI (the current home), redesigned per `design/main-chat.png`: header with hamburger + `Sign in`/`Register` pill buttons (push `SignInScreen` / `SignUpScreen`), empty-state hero (`AppLogo` reused from signup screen + "Student Assistant" / "New Chat"), UI-only input bar (image/code icons + send button; no real messaging or AI yet).
 - `lib/signup_screen.dart` — signup form (`SignUpScreen`): logo, Google/Facebook and app logo painted via `CustomPaint`, Indonesian validation, mixed EN/ID labels ("ATAU", "Masukkan Email"). Bottom outline button opens `SignInScreen`.
 - `lib/signin_screen.dart` — sign-in form (`SignInScreen`), mirror of signup layout (Email + Password only, no repeat field). Bottom outline button opens `SignUpScreen`. Note: shared auth widgets (logo, brand icons, divider, back button, field styles) are intentionally duplicated per-screen, not extracted.
-- `test/widget_test.dart` — tests: chat screen renders, Register/Sign in open auth screens, form validation errors, cross-navigation. Note tests set `tester.view.physicalSize` tall (1200x2600) so the whole scrollable signup form is laid out.
+- `test/widget_test.dart` — tests: chat screen renders (hero, no mock messages), Register/Sign in open auth screens, form validation errors, cross-navigation. Note tests set `tester.view.physicalSize` tall (1200x2600) so the whole scrollable signup form is laid out.
 
 ## Conventions & gotchas
 
