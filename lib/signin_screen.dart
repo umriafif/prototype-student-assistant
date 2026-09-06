@@ -2,31 +2,29 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'signin_screen.dart';
+import 'signup_screen.dart';
 
 const _primary = Color(0xFF1C1C1E);
 const _labelGrey = Color(0xFF8E8E93);
 const _hintGrey = Color(0xFFABABAB);
 const _borderGrey = Color(0xFFE0E0E0);
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmController.dispose();
     super.dispose();
   }
 
@@ -46,21 +44,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) return 'Password wajib diisi';
-    if (value.length < 6) return 'Password minimal 6 karakter';
     return null;
   }
 
-  String? _validateConfirmPassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Konfirmasi password wajib diisi';
-    }
-    if (value != _passwordController.text) return 'Password tidak cocok';
-    return null;
-  }
-
-  void _onSignUp() {
+  void _onSignIn() {
     if (!_formKey.currentState!.validate()) return;
-    _showSnackBar('Registrasi berhasil (demo)');
+    _showSnackBar('Login berhasil (demo)');
+  }
+
+  void _openSignUp() {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute<void>(builder: (_) => const SignUpScreen()));
   }
 
   InputDecoration _decoration(String hint) {
@@ -119,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Center(child: AppLogo(size: 92)),
+                  const Center(child: _AppLogo(size: 92)),
                   const SizedBox(height: 20),
                   const Center(
                     child: Text(
@@ -135,7 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(height: 4),
                   const Center(
                     child: Text(
-                      'Sign Up',
+                      'Sign In',
                       style: TextStyle(
                         color: _labelGrey,
                         fontSize: 15,
@@ -163,28 +158,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           controller: _passwordController,
                           obscureText: true,
-                          textInputAction: TextInputAction.next,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          validator: _validatePassword,
-                          decoration: _decoration('Masukkan Password'),
-                        ),
-                        const SizedBox(height: 18),
-                        _fieldLabel('Repeat Password'),
-                        TextFormField(
-                          controller: _confirmController,
-                          obscureText: true,
                           textInputAction: TextInputAction.done,
                           enableSuggestions: false,
                           autocorrect: false,
-                          validator: _validateConfirmPassword,
+                          validator: _validatePassword,
                           decoration: _decoration('Masukkan Password'),
                         ),
                         const SizedBox(height: 24),
                         SizedBox(
                           height: 52,
                           child: FilledButton(
-                            onPressed: _onSignUp,
+                            onPressed: _onSignIn,
                             style: FilledButton.styleFrom(
                               backgroundColor: _primary,
                               foregroundColor: Colors.white,
@@ -194,7 +178,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            child: const Text('Sign Up'),
+                            child: const Text('Sign In'),
                           ),
                         ),
                       ],
@@ -228,15 +212,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: 50,
                     child: OutlinedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (_) => const SignInScreen(),
-                          ),
-                        );
-                      },
+                      onPressed: _openSignUp,
                       style: _outlineStyle,
-                      child: const Text('Sign In'),
+                      child: const Text('Sign Up'),
                     ),
                   ),
                 ],
@@ -310,8 +288,8 @@ class _OrDivider extends StatelessWidget {
   }
 }
 
-class AppLogo extends StatelessWidget {
-  const AppLogo({super.key, required this.size});
+class _AppLogo extends StatelessWidget {
+  const _AppLogo({required this.size});
 
   final double size;
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'signin_screen.dart';
 import 'signup_screen.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
@@ -57,13 +58,11 @@ class _Header extends StatelessWidget {
                 background: const Color(0xFFECECEE),
                 foreground: _dark,
                 onTap: () {
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                      const SnackBar(
-                        content: Text('Halaman Sign In belum tersedia'),
-                      ),
-                    );
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const SignInScreen(),
+                    ),
+                  );
                 },
               ),
               const SizedBox(width: 8),

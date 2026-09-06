@@ -12,9 +12,10 @@ Flutter app (Dart) — "AI Student Assistant". Scaffolded with `flutter create`;
 ## Structure
 
 - `lib/main.dart` — entrypoint; `AIStudentAssistantApp` (MaterialApp) → `ChatScreen`. No state management or service layer yet; keep simple until architecture is decided.
-- `lib/chat_screen.dart` — chat UI (the current home). Header has `Register`/`Sign in` pill buttons that push `SignUpScreen` / show placeholder snackbars. All UI is static; code block is tokenized mock content (`_codeLines`), not a real AI response.
-- `lib/signup_screen.dart` — signup form (`SignUpScreen`) with the app logo / Google / Facebook logos painted via `CustomPaint` (no asset files). Validation messages are Indonesian; UI labels mix English + Indonesian ("ATAU", "Masukkan Email").
-- `test/widget_test.dart` — tests: chat screen renders, Register opens signup, form validation errors. Note tests set `tester.view.physicalSize` tall (1200x2600) so the whole scrollable signup form is laid out.
+- `lib/chat_screen.dart` — chat UI (the current home). Header has `Register`/`Sign in` pill buttons that push `SignUpScreen` / `SignInScreen`. All UI is static; code block is tokenized mock content (`_codeLines`), not a real AI response.
+- `lib/signup_screen.dart` — signup form (`SignUpScreen`): logo, Google/Facebook and app logo painted via `CustomPaint`, Indonesian validation, mixed EN/ID labels ("ATAU", "Masukkan Email"). Bottom outline button opens `SignInScreen`.
+- `lib/signin_screen.dart` — sign-in form (`SignInScreen`), mirror of signup layout (Email + Password only, no repeat field). Bottom outline button opens `SignUpScreen`. Note: shared auth widgets (logo, brand icons, divider, back button, field styles) are intentionally duplicated per-screen, not extracted.
+- `test/widget_test.dart` — tests: chat screen renders, Register/Sign in open auth screens, form validation errors, cross-navigation. Note tests set `tester.view.physicalSize` tall (1200x2600) so the whole scrollable signup form is laid out.
 
 ## Conventions & gotchas
 
