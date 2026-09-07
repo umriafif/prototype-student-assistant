@@ -146,7 +146,7 @@ class _HeroCenter extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: const [
-          AppLogo(size: 80),
+          // AppLogo(size: 80),
           SizedBox(height: 22),
           Text(
             'Student Assistant',
