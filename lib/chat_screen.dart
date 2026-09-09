@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'signin_screen.dart';
 import 'signup_screen.dart';
-import 'widgets/app_sidebar.dart';
+import 'widgets/sidebar_welcome.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
 const Color _border = Color(0xFFE8E8EA);
@@ -17,7 +17,7 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _panel,
-      drawer: const AppDrawer(),
+      drawer: const SidebarWelcomeDrawer(),
       body: const Column(
         children: [
           _Header(),
@@ -83,6 +83,7 @@ class _Hamburger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: const ValueKey('hamburger'),
       onTap: () => Scaffold.of(context).openDrawer(),
       behavior: HitTestBehavior.opaque,
       child: SizedBox(

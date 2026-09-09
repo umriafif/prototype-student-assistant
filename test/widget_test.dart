@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ai_student_assistant/main.dart';
-import 'package:ai_student_assistant/widgets/app_sidebar.dart';
+import 'package:ai_student_assistant/widgets/sidebar.dart';
+import 'package:ai_student_assistant/widgets/sidebar_welcome.dart';
 
 void main() {
   testWidgets('Chat screen renders', (WidgetTester tester) async {
@@ -131,5 +132,114 @@ void main() {
     await tester.tap(find.text('Sign Up'));
     await tester.pumpAndSettle();
     expect(find.text('Repeat Password'), findsOneWidget);
+  });
+
+  testWidgets('Hamburger opens sidebar (welcome)', (WidgetTester tester) async {
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Search'), findsOneWidget);
+    expect(find.text('More Tools+'), findsOneWidget);
+    expect(find.text('Chats'), findsOneWidget);
+    expect(find.text('flippy@figma.com'), findsNothing);
+    expect(find.text('Analog Clock React app'), findsNothing);
+  });
+
+  testWidgets('Sidebar shows chat list and footer', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(drawer: const SidebarDrawer(), body: const SizedBox()),
+      ),
+    );
+    tester.state<ScaffoldState>(find.byType(Scaffold)).openDrawer();
+    await tester.pumpAndSettle();
+
+    expect(find.text('Analog Clock React app'), findsOneWidget);
+    expect(find.text('Simple Design System'), findsOneWidget);
+    expect(find.text('Figma variable planning'), findsOneWidget);
+    expect(find.text('OKCLH token algorithm'), findsOneWidget);
+    expect(find.text('Component naming advice'), findsOneWidget);
+    expect(find.text('flippy@figma.com'), findsOneWidget);
+    expect(find.byIcon(Icons.settings), findsOneWidget);
+  });
+
+  testWidgets('Welcome drawer has no chat list', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          drawer: const SidebarWelcomeDrawer(),
+          body: const SizedBox(),
+        ),
+      ),
+    );
+    tester.state<ScaffoldState>(find.byType(Scaffold)).openDrawer();
+    await tester.pumpAndSettle();
+
+    expect(find.text('Analog Clock React app'), findsNothing);
+    expect(find.text('flippy@figma.com'), findsNothing);
+  });
+
+  testWidgets('More Tools+ opens tool menu', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Search tool'), findsOneWidget);
+    expect(find.text('Unggulan'), findsOneWidget);
+    expect(find.text('Tools'), findsOneWidget);
+    expect(find.text('Tool untuk membantu tugas coding anda'), findsOneWidget);
+    expect(
+      find.text('Buat makalah dengan mudah dengan bantuan AI'),
+      findsOneWidget,
+    );
+    expect(
+      find.text('Paraphrase teks anda hanya dengan sekali klik'),
+      findsOneWidget,
+    );
+    expect(find.text('Today • 10k User'), findsOneWidget);
+    expect(find.text('Makalah'), findsNWidgets(2));
+    expect(find.text('Paraphrase'), findsNWidgets(2));
+    expect(find.text('CodeX'), findsNWidgets(2));
+    expect(find.text('Grammar'), findsOneWidget);
+    expect(find.text('Math'), findsOneWidget);
+    expect(find.text('Journal Search'), findsOneWidget);
+    expect(find.text('Summarize'), findsOneWidget);
+    expect(find.text('Citation'), findsOneWidget);
+    expect(find.text('Translate'), findsOneWidget);
+  });
+
+  testWidgets('Tool menu back button returns to chat', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded));
+    await tester.pumpAndSettle();
+
+    expect(find.text('New Chat'), findsOneWidget);
   });
 }
