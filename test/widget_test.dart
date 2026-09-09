@@ -186,4 +186,60 @@ void main() {
     expect(find.text('Analog Clock React app'), findsNothing);
     expect(find.text('flippy@figma.com'), findsNothing);
   });
+
+  testWidgets('More Tools+ opens tool menu', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Search tool'), findsOneWidget);
+    expect(find.text('Unggulan'), findsOneWidget);
+    expect(find.text('Tools'), findsOneWidget);
+    expect(find.text('Tool untuk membantu tugas coding anda'), findsOneWidget);
+    expect(
+      find.text('Buat makalah dengan mudah dengan bantuan AI'),
+      findsOneWidget,
+    );
+    expect(
+      find.text('Paraphrase teks anda hanya dengan sekali klik'),
+      findsOneWidget,
+    );
+    expect(find.text('Today • 10k User'), findsOneWidget);
+    expect(find.text('Makalah'), findsNWidgets(2));
+    expect(find.text('Paraphrase'), findsNWidgets(2));
+    expect(find.text('CodeX'), findsNWidgets(2));
+    expect(find.text('Grammar'), findsOneWidget);
+    expect(find.text('Math'), findsOneWidget);
+    expect(find.text('Journal Search'), findsOneWidget);
+    expect(find.text('Summarize'), findsOneWidget);
+    expect(find.text('Citation'), findsOneWidget);
+    expect(find.text('Translate'), findsOneWidget);
+  });
+
+  testWidgets('Tool menu back button returns to chat', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded));
+    await tester.pumpAndSettle();
+
+    expect(find.text('New Chat'), findsOneWidget);
+  });
 }

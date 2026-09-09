@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../tool_menu_screen.dart';
+
 const _dark = Color(0xFF1C1C1E);
 const _border = Color(0xFFE8E8EA);
 const _greys = Color(0xFF8E8E93);
@@ -57,7 +59,11 @@ class Sidebar extends StatelessWidget {
           _RowItem(
             icon: Icons.grid_view_rounded,
             label: 'More Tools+',
-            onTap: () => _placeholder(context, 'Fitur belum tersedia'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const ToolMenuScreen()),
+              );
+            },
           ),
           const SizedBox(height: 20),
           const Text(
