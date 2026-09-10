@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-import 'widgets/sidebar_welcome.dart';
+import 'widgets/sidebar.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
 const Color _border = Color(0xFFE8E8EA);
@@ -100,7 +100,7 @@ The real solutions are \$(3, 4)\$ and \$(4, 3)\$.''';
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _panel,
-      drawer: const SidebarWelcomeDrawer(),
+      drawer: const SidebarDrawer(),
       body: SafeArea(
         child: Column(
           children: [

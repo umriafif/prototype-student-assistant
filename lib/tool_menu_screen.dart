@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'chat_math.dart';
+import 'chat_jurnal.dart';
 
 const _dark = Color(0xFF1C1C1E);
 const _greys = Color(0xFF8E8E93);
@@ -99,6 +100,12 @@ class ToolMenuScreen extends StatelessWidget {
                               Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                   builder: (_) => const MathChatScreen(),
+                                ),
+                              );
+                            }else if (tool.title == 'Journal Search') {
+                              Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (_) => const JournalSearchScreen(),
                                 ),
                               );
                             } else {
