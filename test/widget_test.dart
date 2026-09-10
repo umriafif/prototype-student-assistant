@@ -242,4 +242,30 @@ void main() {
 
     expect(find.text('New Chat'), findsOneWidget);
   });
+
+  testWidgets('Tool menu Math button opens chat_math', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Math'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Upload Files'), findsOneWidget);
+    expect(find.text('Browse Files'), findsOneWidget);
+
+    await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Search tool'), findsOneWidget);
+  });
 }

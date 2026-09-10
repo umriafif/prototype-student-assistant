@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'chat_math.dart';
+
 const _dark = Color(0xFF1C1C1E);
 const _greys = Color(0xFF8E8E93);
 const _greylight = Color(0xFFC2C2C6);
@@ -92,8 +94,17 @@ class ToolMenuScreen extends StatelessWidget {
                       for (final tool in _tools)
                         _ToolTile(
                           tool: tool,
-                          onTap: () =>
-                              _placeholder(context, 'Fitur belum tersedia'),
+                          onTap: () {
+                            if (tool.title == 'Math') {
+                              Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (_) => const MathChatScreen(),
+                                ),
+                              );
+                            } else {
+                              _placeholder(context, 'Fitur belum tersedia');
+                            }
+                          },
                         ),
                     ],
                   ),
