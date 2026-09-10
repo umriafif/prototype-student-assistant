@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'chat_math.dart';
 import 'chat_jurnal.dart';
+import 'chat_summarize.dart';
+import 'chat_citation.dart';
+import 'chat_translate.dart';
 
 const _dark = Color(0xFF1C1C1E);
 const _greys = Color(0xFF8E8E93);
@@ -106,6 +109,24 @@ class ToolMenuScreen extends StatelessWidget {
                               Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                   builder: (_) => const JournalSearchScreen(),
+                                ),
+                              );
+                            }else if (tool.title == 'Summarize') {
+                              Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (_) => const SummarizeScreen(),
+                                ),
+                              );
+                            }else if (tool.title == 'Citation') {
+                              Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (_) => const CitationScreen(),
+                                ),
+                              );
+                            }else if (tool.title == 'Translate') {
+                              Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (_) => const TranslateScreen(),
                                 ),
                               );
                             } else {
