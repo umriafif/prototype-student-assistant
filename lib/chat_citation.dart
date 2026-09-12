@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'profile.dart';
 import 'widgets/sidebar.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
@@ -19,7 +21,8 @@ class _CitationScreenState extends State<CitationScreen> {
   bool _isFileUploaded = false;
   bool _isCited = false;
 
-  final TextEditingController _journalProfileController = TextEditingController();
+  final TextEditingController _journalProfileController =
+      TextEditingController();
   String _selectedStyle = 'APA';
 
   final List<String> _citationStyles = [
@@ -69,11 +72,12 @@ class _CitationScreenState extends State<CitationScreen> {
             const Divider(height: 1, thickness: 1, color: _border),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 20,
+                ),
                 child: _isCited
-                    ? _CiteResultView(
-                        onTryAgain: _handleTryAgain,
-                      )
+                    ? _CiteResultView(onTryAgain: _handleTryAgain)
                     : _CiteDefaultView(
                         profileController: _journalProfileController,
                         selectedStyle: _selectedStyle,
@@ -120,7 +124,11 @@ class _Header extends StatelessWidget {
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
             icon: const Icon(Icons.account_circle, size: 28, color: _dark),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const ProfileScreen()),
+              );
+            },
           ),
         ],
       ),
@@ -199,10 +207,7 @@ class _CiteDefaultView extends StatelessWidget {
         const SizedBox(height: 6),
         const Text(
           'AI Student Assistant',
-          style: TextStyle(
-            fontSize: 12.5,
-            color: _placeholderGrey,
-          ),
+          style: TextStyle(fontSize: 12.5, color: _placeholderGrey),
         ),
         const SizedBox(height: 20),
 
@@ -215,10 +220,7 @@ class _CiteDefaultView extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: const Color(0xFFDCDCE0),
-                width: 1.2,
-              ),
+              border: Border.all(color: const Color(0xFFDCDCE0), width: 1.2),
             ),
             child: Column(
               children: [
@@ -251,13 +253,18 @@ class _CiteDefaultView extends StatelessWidget {
                       : 'Drag and drop or click to browse',
                   style: TextStyle(
                     fontSize: 12.5,
-                    color: isFileUploaded ? Colors.green : const Color(0xFF8E8E93),
+                    color: isFileUploaded
+                        ? Colors.green
+                        : const Color(0xFF8E8E93),
                   ),
                 ),
                 if (!isFileUploaded) ...[
                   const SizedBox(height: 14),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFF14142B),
                       borderRadius: BorderRadius.circular(6),
@@ -314,7 +321,10 @@ class _CiteDefaultView extends StatelessWidget {
             decoration: const InputDecoration(
               hintText: 'Cari berdasarkan Judul, DOI, URL, ISBN,or ..',
               hintStyle: TextStyle(fontSize: 13, color: Color(0xFFA0A0A5)),
-              contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 12,
+              ),
               border: InputBorder.none,
             ),
           ),
@@ -454,9 +464,7 @@ class _CiteResultView extends StatelessWidget {
                   text: 'Borobudur Communication Review',
                   style: TextStyle(fontStyle: FontStyle.italic),
                 ),
-                TextSpan(
-                  text: ', 4(1), 1–17. ',
-                ),
+                TextSpan(text: ', 4(1), 1–17. '),
                 TextSpan(
                   text: 'https://doi.org/10.31603/bcrev.10585',
                   style: TextStyle(

@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+
+import 'profile.dart';
 import 'widgets/sidebar.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
@@ -18,7 +20,7 @@ class SummarizeScreen extends StatefulWidget {
 class _SummarizeScreenState extends State<SummarizeScreen> {
   bool _isFileUploaded = false;
   bool _isSummarized = false;
-  
+
   final TextEditingController _textController = TextEditingController();
   int _characterCount = 0;
 
@@ -64,7 +66,9 @@ class _SummarizeScreenState extends State<SummarizeScreen> {
     _typewriterTimer?.cancel();
     int currentIndex = 0;
 
-    _typewriterTimer = Timer.periodic(const Duration(milliseconds: 15), (timer) {
+    _typewriterTimer = Timer.periodic(const Duration(milliseconds: 15), (
+      timer,
+    ) {
       if (currentIndex < _summaryResult.length) {
         setState(() {
           _displayedSummaryText += _summaryResult[currentIndex];
@@ -104,7 +108,10 @@ class _SummarizeScreenState extends State<SummarizeScreen> {
             const Divider(height: 1, thickness: 1, color: _border),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 20,
+                ),
                 child: _isSummarized
                     ? _SummarizeResultView(
                         summaryText: _displayedSummaryText,
@@ -151,7 +158,11 @@ class _Header extends StatelessWidget {
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
             icon: const Icon(Icons.account_circle, size: 28, color: _dark),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const ProfileScreen()),
+              );
+            },
           ),
         ],
       ),
@@ -222,10 +233,7 @@ class _SummarizeDefaultView extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: const Color(0xFFDCDCE0),
-                width: 1.2,
-              ),
+              border: Border.all(color: const Color(0xFFDCDCE0), width: 1.2),
             ),
             child: Column(
               children: [
@@ -258,13 +266,18 @@ class _SummarizeDefaultView extends StatelessWidget {
                       : 'Drag and drop or click to browse',
                   style: TextStyle(
                     fontSize: 12.5,
-                    color: isFileUploaded ? Colors.green : const Color(0xFF8E8E93),
+                    color: isFileUploaded
+                        ? Colors.green
+                        : const Color(0xFF8E8E93),
                   ),
                 ),
                 if (!isFileUploaded) ...[
                   const SizedBox(height: 14),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFF14142B),
                       borderRadius: BorderRadius.circular(6),
@@ -363,7 +376,10 @@ class _SummarizeDefaultView extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: _dark,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -433,7 +449,10 @@ class _SummarizeResultView extends StatelessWidget {
                 backgroundColor: const Color(0xFFEFEFF4),
                 foregroundColor: _dark,
                 side: BorderSide.none,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -449,7 +468,10 @@ class _SummarizeResultView extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: _dark,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../profile.dart';
+
 const _dark = Color(0xFF1C1C1E);
 const _border = Color(0xFFE8E8EA);
 const _greys = Color(0xFF8E8E93);
@@ -93,8 +95,20 @@ class AppSidebar extends StatelessWidget {
             const SizedBox(height: 12),
             _FooterRow(
               email: userEmail ?? 'flippy@figma.com',
-              onSettings: () =>
-                  _placeholder(context, 'Pengaturan belum tersedia'),
+              onProfile: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ProfileScreen(),
+                  ),
+                );
+              },
+              onSettings: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ProfileScreen(),
+                  ),
+                );
+              },
             ),
           ],
         ],
@@ -238,21 +252,29 @@ class _ChatItem extends StatelessWidget {
 }
 
 class _FooterRow extends StatelessWidget {
-  const _FooterRow({required this.email, required this.onSettings});
+  const _FooterRow({
+    required this.email,
+    required this.onProfile,
+    required this.onSettings,
+  });
 
   final String email;
+  final VoidCallback onProfile;
   final VoidCallback onSettings;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const SizedBox(
-          width: 32,
-          height: 32,
-          child: CircleAvatar(
-            backgroundColor: _activeBg,
-            child: Icon(Icons.person, size: 18, color: _greys),
+        GestureDetector(
+          onTap: onProfile,
+          child: const SizedBox(
+            width: 32,
+            height: 32,
+            child: CircleAvatar(
+              backgroundColor: _activeBg,
+              child: Icon(Icons.person, size: 18, color: _greys),
+            ),
           ),
         ),
         const SizedBox(width: 10),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'profile.dart';
 import 'widgets/sidebar.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
@@ -88,7 +90,10 @@ class _TranslateScreenState extends State<TranslateScreen> {
             const Divider(height: 1, thickness: 1, color: _border),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 24,
+                ),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -103,14 +108,22 @@ class _TranslateScreenState extends State<TranslateScreen> {
                         targetLanguage: _targetLanguage,
                         languages: _languages,
                         onSourceChanged: (val) {
-                          if (val != null) setState(() => _sourceLanguage = val);
+                          if (val != null) {
+                            setState(() => _sourceLanguage = val);
+                          }
                         },
                         onTargetChanged: (val) {
-                          if (val != null) setState(() => _targetLanguage = val);
+                          if (val != null) {
+                            setState(() => _targetLanguage = val);
+                          }
                         },
                         onSwap: _swapLanguages,
                       ),
-                      const Divider(height: 1, thickness: 1, color: Color(0xFFE0E0E0)),
+                      const Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Color(0xFFE0E0E0),
+                      ),
 
                       // Source Input Area
                       Padding(
@@ -144,13 +157,21 @@ class _TranslateScreenState extends State<TranslateScreen> {
                                 IconButton(
                                   constraints: const BoxConstraints(),
                                   padding: const EdgeInsets.only(right: 12),
-                                  icon: const Icon(Icons.mic_none, color: _iconGrey, size: 22),
+                                  icon: const Icon(
+                                    Icons.mic_none,
+                                    color: _iconGrey,
+                                    size: 22,
+                                  ),
                                   onPressed: () {},
                                 ),
                                 IconButton(
                                   constraints: const BoxConstraints(),
                                   padding: EdgeInsets.zero,
-                                  icon: const Icon(Icons.volume_up_outlined, color: _iconGrey, size: 22),
+                                  icon: const Icon(
+                                    Icons.volume_up_outlined,
+                                    color: _iconGrey,
+                                    size: 22,
+                                  ),
                                   onPressed: () {},
                                 ),
                               ],
@@ -181,40 +202,68 @@ class _TranslateScreenState extends State<TranslateScreen> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                            SizedBox(height: _translatedText.isNotEmpty ? 24 : 12),
+                            SizedBox(
+                              height: _translatedText.isNotEmpty ? 24 : 12,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 IconButton(
                                   constraints: const BoxConstraints(),
                                   padding: EdgeInsets.zero,
-                                  icon: const Icon(Icons.volume_up_outlined, color: _iconGrey, size: 20),
+                                  icon: const Icon(
+                                    Icons.volume_up_outlined,
+                                    color: _iconGrey,
+                                    size: 20,
+                                  ),
                                   onPressed: () {},
                                 ),
                                 Row(
                                   children: [
                                     IconButton(
                                       constraints: const BoxConstraints(),
-                                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                                      icon: const Icon(Icons.copy_outlined, color: _iconGrey, size: 20),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                      ),
+                                      icon: const Icon(
+                                        Icons.copy_outlined,
+                                        color: _iconGrey,
+                                        size: 20,
+                                      ),
                                       onPressed: () {},
                                     ),
                                     IconButton(
                                       constraints: const BoxConstraints(),
-                                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                                      icon: const Icon(Icons.cancel_outlined, color: _iconGrey, size: 20),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                      ),
+                                      icon: const Icon(
+                                        Icons.cancel_outlined,
+                                        color: _iconGrey,
+                                        size: 20,
+                                      ),
                                       onPressed: _clearText,
                                     ),
                                     IconButton(
                                       constraints: const BoxConstraints(),
-                                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                                      icon: const Icon(Icons.edit_outlined, color: _iconGrey, size: 20),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                      ),
+                                      icon: const Icon(
+                                        Icons.edit_outlined,
+                                        color: _iconGrey,
+                                        size: 20,
+                                      ),
                                       onPressed: () {},
                                     ),
                                     IconButton(
                                       constraints: const BoxConstraints(),
                                       padding: const EdgeInsets.only(left: 8),
-                                      icon: const Icon(Icons.ios_share, color: _iconGrey, size: 20),
+                                      icon: const Icon(
+                                        Icons.ios_share,
+                                        color: _iconGrey,
+                                        size: 20,
+                                      ),
                                       onPressed: () {},
                                     ),
                                   ],
@@ -260,7 +309,11 @@ class _Header extends StatelessWidget {
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
             icon: const Icon(Icons.account_circle, size: 28, color: _dark),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const ProfileScreen()),
+              );
+            },
           ),
         ],
       ),
@@ -335,10 +388,7 @@ class _LanguageSelectorBar extends StatelessWidget {
                 color: _primaryBlue,
               ),
               items: languages.map((String lang) {
-                return DropdownMenuItem<String>(
-                  value: lang,
-                  child: Text(lang),
-                );
+                return DropdownMenuItem<String>(value: lang, child: Text(lang));
               }).toList(),
               onChanged: onSourceChanged,
             ),
@@ -361,10 +411,7 @@ class _LanguageSelectorBar extends StatelessWidget {
                 color: _primaryBlue,
               ),
               items: languages.map((String lang) {
-                return DropdownMenuItem<String>(
-                  value: lang,
-                  child: Text(lang),
-                );
+                return DropdownMenuItem<String>(value: lang, child: Text(lang));
               }).toList(),
               onChanged: onTargetChanged,
             ),
