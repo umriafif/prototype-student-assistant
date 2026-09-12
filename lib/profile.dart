@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'personalization.dart';
+
 const Color _background = Color(0xFFF5F5F5);
 const Color _panel = Color(0xFFFFFFFF);
 const Color _border = Color(0xFFE7E7EC);
@@ -46,25 +48,32 @@ class ProfileScreen extends StatelessWidget {
                 mediaQuery.padding.top -
                 mediaQuery.padding.bottom,
             decoration: const BoxDecoration(color: _panel),
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _TopBar(),
-                  SizedBox(height: 20),
-                  _SectionTitle('StudentAsistent saya'),
-                  SizedBox(height: 12),
+                  const _TopBar(),
+                  const SizedBox(height: 20),
+                  const _SectionTitle('StudentAsistent saya'),
+                  const SizedBox(height: 12),
                   _ProfileTile(
                     title: 'Personalisasi',
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.sentiment_satisfied_alt_outlined,
                       size: 18,
                       color: _dark,
                     ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => const PersonalizationScreen(),
+                        ),
+                      );
+                    },
                   ),
-                  SizedBox(height: 12),
-                  _ProfileTile(
+                  const SizedBox(height: 12),
+                  const _ProfileTile(
                     title: 'Memori',
                     icon: Icon(
                       Icons.import_contacts_outlined,
@@ -236,16 +245,18 @@ class _ProfileTile extends StatelessWidget {
     required this.icon,
     this.value,
     this.hasValue = false,
+    this.onTap,
   });
 
   final String title;
   final Widget icon;
   final String? value;
   final bool hasValue;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final content = Container(
       width: double.infinity,
       height: 56,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -301,6 +312,12 @@ class _ProfileTile extends StatelessWidget {
         ],
       ),
     );
+
+    if (onTap == null) {
+      return content;
+    }
+
+    return GestureDetector(onTap: onTap, child: content);
   }
 }
 
