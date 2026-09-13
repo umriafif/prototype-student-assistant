@@ -107,8 +107,6 @@ class _TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         GestureDetector(
           onTap: () => Navigator.of(context).maybePop(),
@@ -136,15 +134,14 @@ class _TopBar extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(width: 12),
         const Expanded(
-          child: Center(
-            child: Text(
-              'Memori',
-              style: TextStyle(
-                color: _textPrimary,
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
+          child: Text(
+            'Memori',
+            style: TextStyle(
+              color: _textPrimary,
+              fontSize: 28,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),

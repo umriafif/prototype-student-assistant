@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'general.dart';
 import 'memory.dart';
+import 'notification.dart';
 import 'personalization.dart';
 import 'upgrade_plan.dart';
 
@@ -138,6 +139,13 @@ class ProfileScreen extends StatelessWidget {
                       size: 18,
                       color: _dark,
                     ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => const NotificationScreen(),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: 12),
                   _ProfileTile(
