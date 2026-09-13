@@ -54,126 +54,128 @@ class ProfileScreen extends StatelessWidget {
                 mediaQuery.padding.top -
                 mediaQuery.padding.bottom,
             decoration: const BoxDecoration(color: _panel),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _TopBar(),
-                  const SizedBox(height: 20),
-                  const _SectionTitle('StudentAsistent saya'),
-                  const SizedBox(height: 12),
-                  _ProfileTile(
-                    title: 'Personalisasi',
-                    icon: const Icon(
-                      Icons.sentiment_satisfied_alt_outlined,
-                      size: 18,
-                      color: _dark,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const _TopBar(),
+                    const SizedBox(height: 20),
+                    const _SectionTitle('StudentAsistent saya'),
+                    const SizedBox(height: 12),
+                    _ProfileTile(
+                      title: 'Personalisasi',
+                      icon: const Icon(
+                        Icons.sentiment_satisfied_alt_outlined,
+                        size: 18,
+                        color: _dark,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const PersonalizationScreen(),
+                          ),
+                        );
+                      },
                     ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => const PersonalizationScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  _ProfileTile(
-                    title: 'Memori',
-                    icon: const Icon(
-                      Icons.import_contacts_outlined,
-                      size: 18,
-                      color: _dark,
+                    const SizedBox(height: 12),
+                    _ProfileTile(
+                      title: 'Memori',
+                      icon: const Icon(
+                        Icons.import_contacts_outlined,
+                        size: 18,
+                        color: _dark,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const MemoryScreen(),
+                          ),
+                        );
+                      },
                     ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => const MemoryScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 20),
-                  _SectionTitle('Akun'),
-                  SizedBox(height: 12),
-                  _ProfileTile(
-                    title: 'Upgrade paket',
-                    icon: Icon(
-                      Icons.auto_awesome_outlined,
-                      size: 18,
-                      color: _dark,
+                    SizedBox(height: 20),
+                    _SectionTitle('Akun'),
+                    SizedBox(height: 12),
+                    _ProfileTile(
+                      title: 'Upgrade paket',
+                      icon: Icon(
+                        Icons.auto_awesome_outlined,
+                        size: 18,
+                        color: _dark,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const UpgradePlanScreen(),
+                          ),
+                        );
+                      },
                     ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => const UpgradePlanScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 12),
-                  _ProfileTile(
-                    title: 'Email',
-                    value: 'user@gmail.com',
-                    hasValue: true,
-                    icon: Icon(Icons.email_outlined, size: 18, color: _dark),
-                  ),
-                  SizedBox(height: 20),
-                  _SectionTitle('Umum'),
-                  SizedBox(height: 12),
-                  _ProfileTile(
-                    title: 'Umum',
-                    icon: Icon(Icons.settings_outlined, size: 18, color: _dark),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => const GeneralScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 12),
-                  _ProfileTile(
-                    title: 'Notifikasi',
-                    icon: Icon(
-                      Icons.notifications_none_outlined,
-                      size: 18,
-                      color: _dark,
+                    SizedBox(height: 12),
+                    _ProfileTile(
+                      title: 'Email',
+                      value: 'user@gmail.com',
+                      hasValue: true,
+                      icon: Icon(Icons.email_outlined, size: 18, color: _dark),
                     ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => const NotificationScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 12),
-                  _ProfileTile(
-                    title: 'Tentang',
-                    icon: Icon(Icons.info_outline, size: 18, color: _dark),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => const AboutScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 8),
-                  _ProfileTile(
-                    title: 'Keluar',
-                    icon: Icon(Icons.logout_outlined, size: 18, color: _dark),
-                    onTap: () {
-                      showDialog<void>(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (_) => const SignOutPopup(),
-                      );
-                    },
-                  ),
-                ],
+                    SizedBox(height: 20),
+                    _SectionTitle('Umum'),
+                    SizedBox(height: 12),
+                    _ProfileTile(
+                      title: 'Umum',
+                      icon: Icon(Icons.settings_outlined, size: 18, color: _dark),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const GeneralScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 12),
+                    _ProfileTile(
+                      title: 'Notifikasi',
+                      icon: Icon(
+                        Icons.notifications_none_outlined,
+                        size: 18,
+                        color: _dark,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const NotificationScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 12),
+                    _ProfileTile(
+                      title: 'Tentang',
+                      icon: Icon(Icons.info_outline, size: 18, color: _dark),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const AboutScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 8),
+                    _ProfileTile(
+                      title: 'Keluar',
+                      icon: Icon(Icons.logout_outlined, size: 18, color: _dark),
+                      onTap: () {
+                        showDialog<void>(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (_) => const SignOutPopup(),
+                        );
+                      },
+                    ),
+                  ], 
+                ),
               ),
             ),
           ),
