@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'about.dart';
 import 'general.dart';
 import 'memory.dart';
 import 'notification.dart';
@@ -151,6 +152,13 @@ class ProfileScreen extends StatelessWidget {
                   _ProfileTile(
                     title: 'Tentang',
                     icon: Icon(Icons.info_outline, size: 18, color: _dark),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => const AboutScreen(),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: 8),
                   _ProfileTile(
