@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'chat_math.dart';
+import 'profile.dart';
 import 'chat_jurnal.dart';
 import 'chat_summarize.dart';
 import 'chat_citation.dart';
@@ -105,25 +106,25 @@ class ToolMenuScreen extends StatelessWidget {
                                   builder: (_) => const MathChatScreen(),
                                 ),
                               );
-                            }else if (tool.title == 'Journal Search') {
+                            } else if (tool.title == 'Journal Search') {
                               Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                   builder: (_) => const JournalSearchScreen(),
                                 ),
                               );
-                            }else if (tool.title == 'Summarize') {
+                            } else if (tool.title == 'Summarize') {
                               Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                   builder: (_) => const SummarizeScreen(),
                                 ),
                               );
-                            }else if (tool.title == 'Citation') {
+                            } else if (tool.title == 'Citation') {
                               Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                   builder: (_) => const CitationScreen(),
                                 ),
                               );
-                            }else if (tool.title == 'Translate') {
+                            } else if (tool.title == 'Translate') {
                               Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                   builder: (_) => const TranslateScreen(),
@@ -198,12 +199,19 @@ class _AvatarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: 40,
-      height: 40,
-      child: CircleAvatar(
-        backgroundColor: _greyBg,
-        child: Icon(Icons.person, size: 22, color: _dark),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute<void>(builder: (_) => const ProfileScreen()));
+      },
+      child: const SizedBox(
+        width: 40,
+        height: 40,
+        child: CircleAvatar(
+          backgroundColor: _greyBg,
+          child: Icon(Icons.person, size: 22, color: _dark),
+        ),
       ),
     );
   }

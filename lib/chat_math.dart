@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import 'profile.dart';
 import 'widgets/sidebar.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
@@ -24,7 +25,8 @@ class _MathChatScreenState extends State<MathChatScreen> {
   String _userSubmittedQuestion = '';
 
   // Jawaban AI matematika
-  final String _aiFullResponse = '''To solve this system of equations, we will use the substitution method to reduce the system to a single-variable quadratic equation. Here is the step-by-step solution.
+  final String _aiFullResponse =
+      '''To solve this system of equations, we will use the substitution method to reduce the system to a single-variable quadratic equation. Here is the step-by-step solution.
 
 **Step 1: Express one variable in terms of the other**
 Take the linear equation \$x + y = 7\$ and solve for \$y\$:
@@ -78,7 +80,9 @@ The real solutions are \$(3, 4)\$ and \$(4, 3)\$.''';
     int currentIndex = 0;
 
     // Memunculkan karakter balasan AI satu per satu
-    _typewriterTimer = Timer.periodic(const Duration(milliseconds: 15), (timer) {
+    _typewriterTimer = Timer.periodic(const Duration(milliseconds: 15), (
+      timer,
+    ) {
       if (currentIndex < _aiFullResponse.length) {
         setState(() {
           _displayedAiText += _aiFullResponse[currentIndex];
@@ -188,10 +192,7 @@ class _Hamburger extends StatelessWidget {
 
 // ==================== CENTER CONTENT (UPLOAD / DEFAULT) ====================
 class _HeroCenter extends StatelessWidget {
-  const _HeroCenter({
-    required this.isFileUploaded,
-    required this.onUploadTap,
-  });
+  const _HeroCenter({required this.isFileUploaded, required this.onUploadTap});
 
   final bool isFileUploaded;
   final VoidCallback onUploadTap;
@@ -209,7 +210,10 @@ class _HeroCenter extends StatelessWidget {
                 onTap: onUploadTap,
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 36,
+                    horizontal: 20,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
@@ -245,11 +249,17 @@ class _HeroCenter extends StatelessWidget {
                       const SizedBox(height: 6),
                       const Text(
                         'Drag and drop or click to browse',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF8E8E93)),
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF8E8E93),
+                        ),
                       ),
                       const SizedBox(height: 16),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 18,
+                          vertical: 10,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFF14142B),
                           borderRadius: BorderRadius.circular(8),
@@ -266,7 +276,10 @@ class _HeroCenter extends StatelessWidget {
                       const SizedBox(height: 24),
                       const Text(
                         'Supports PDF, PNG, JPG, or SVG up to 10MB',
-                        style: TextStyle(fontSize: 11, color: Color(0xFFA0A0A5)),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFFA0A0A5),
+                        ),
                       ),
                     ],
                   ),
@@ -283,7 +296,11 @@ class _HeroCenter extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.insert_drive_file, color: Colors.blue, size: 36),
+                    const Icon(
+                      Icons.insert_drive_file,
+                      color: Colors.blue,
+                      size: 36,
+                    ),
                     const SizedBox(width: 12),
                     const Expanded(
                       child: Column(
@@ -305,7 +322,11 @@ class _HeroCenter extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Icon(Icons.check_circle, color: Colors.green, size: 22),
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 22,
+                    ),
                   ],
                 ),
               ),
@@ -379,10 +400,7 @@ class _ChatStreamView extends StatelessWidget {
 
 // ==================== INPUT BAR ====================
 class _InputBar extends StatefulWidget {
-  const _InputBar({
-    required this.isFileUploaded,
-    required this.onSendPressed,
-  });
+  const _InputBar({required this.isFileUploaded, required this.onSendPressed});
 
   final bool isFileUploaded;
   final Function(String) onSendPressed;
@@ -396,12 +414,19 @@ class _AvatarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: 40,
-      height: 40,
-      child: CircleAvatar(
-        backgroundColor: _greyBg,
-        child: Icon(Icons.person, size: 22, color: _dark),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute<void>(builder: (_) => const ProfileScreen()));
+      },
+      child: const SizedBox(
+        width: 40,
+        height: 40,
+        child: CircleAvatar(
+          backgroundColor: _greyBg,
+          child: Icon(Icons.person, size: 22, color: _dark),
+        ),
       ),
     );
   }
@@ -469,10 +494,10 @@ class _InputBarState extends State<_InputBar> {
                       final String messageText = _controller.text.trim().isEmpty
                           ? 'Solve the uploaded math problem.'
                           : _controller.text.trim();
-                          
+
                       // Kosongkan input teks setelah mengirim
                       _controller.clear();
-                      
+
                       widget.onSendPressed(messageText);
                     }
                   },

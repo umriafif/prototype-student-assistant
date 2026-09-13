@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'widgets/sidebar.dart';
 
+import 'profile.dart';
+import 'widgets/sidebar.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
 const Color _border = Color(0xFFE8E8EA);
@@ -61,9 +62,7 @@ class _JournalSearchScreenState extends State<JournalSearchScreen> {
                       onBack: _deactivateSearch,
                       onClear: _deactivateSearch,
                     )
-                  : _JournalDefaultView(
-                      onSearchTap: _activateSearch,
-                    ),
+                  : _JournalDefaultView(onSearchTap: _activateSearch),
             ),
           ],
         ),
@@ -96,7 +95,11 @@ class _Header extends StatelessWidget {
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
             icon: const Icon(Icons.account_circle, size: 28, color: _dark),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const ProfileScreen()),
+              );
+            },
           ),
         ],
       ),
@@ -164,10 +167,7 @@ class _JournalDefaultView extends StatelessWidget {
           const SizedBox(height: 8),
           const Text(
             'AI Student Assistant',
-            style: TextStyle(
-              fontSize: 13,
-              color: _placeholderGrey,
-            ),
+            style: TextStyle(fontSize: 13, color: _placeholderGrey),
           ),
           const SizedBox(height: 24),
           // Search Input Bar
@@ -186,10 +186,7 @@ class _JournalDefaultView extends StatelessWidget {
                   SizedBox(width: 10),
                   Text(
                     'Search Journal',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Color(0xFF555555),
-                    ),
+                    style: TextStyle(fontSize: 14, color: Color(0xFF555555)),
                   ),
                 ],
               ),
@@ -305,10 +302,7 @@ class _JournalItem extends StatelessWidget {
           const SizedBox(height: 2),
           const Text(
             'Supporting line text, lorem ipsum dolor',
-            style: TextStyle(
-              fontSize: 13,
-              color: Color(0xFF666666),
-            ),
+            style: TextStyle(fontSize: 13, color: Color(0xFF666666)),
           ),
         ],
       ),
