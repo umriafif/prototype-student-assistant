@@ -5,6 +5,7 @@ import 'general.dart';
 import 'memory.dart';
 import 'notification.dart';
 import 'personalization.dart';
+import 'signout_popup.dart';
 import 'upgrade_plan.dart';
 
 const Color _background = Color(0xFFF5F5F5);
@@ -164,6 +165,13 @@ class ProfileScreen extends StatelessWidget {
                   _ProfileTile(
                     title: 'Keluar',
                     icon: Icon(Icons.logout_outlined, size: 18, color: _dark),
+                    onTap: () {
+                      showDialog<void>(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) => const SignOutPopup(),
+                      );
+                    },
                   ),
                 ],
               ),
