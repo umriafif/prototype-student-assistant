@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'memory.dart';
 import 'personalization.dart';
+import 'upgrade_plan.dart';
 
 const Color _background = Color(0xFFF5F5F5);
 const Color _panel = Color(0xFFFFFFFF);
@@ -99,6 +100,13 @@ class ProfileScreen extends StatelessWidget {
                       size: 18,
                       color: _dark,
                     ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => const UpgradePlanScreen(),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: 12),
                   _ProfileTile(
