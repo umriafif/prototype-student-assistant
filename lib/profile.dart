@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'memory.dart';
 import 'personalization.dart';
 
 const Color _background = Color(0xFFF5F5F5);
@@ -73,13 +74,20 @@ class ProfileScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 12),
-                  const _ProfileTile(
+                  _ProfileTile(
                     title: 'Memori',
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.import_contacts_outlined,
                       size: 18,
                       color: _dark,
                     ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => const MemoryScreen(),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: 20),
                   _SectionTitle('Akun'),
