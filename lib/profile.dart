@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'general.dart';
 import 'memory.dart';
 import 'personalization.dart';
 import 'upgrade_plan.dart';
@@ -121,6 +122,13 @@ class ProfileScreen extends StatelessWidget {
                   _ProfileTile(
                     title: 'Umum',
                     icon: Icon(Icons.settings_outlined, size: 18, color: _dark),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => const GeneralScreen(),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: 12),
                   _ProfileTile(
