@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 import 'signup_screen.dart';
@@ -192,7 +190,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: OutlinedButton.icon(
                       onPressed: () =>
                           _showSnackBar('Login dengan Google belum tersedia'),
-                      icon: const _GoogleLogo(size: 20),
+                      icon: Image.asset(
+                        'assets/icons/google-icon.png',
+                        width: 32,
+                        height: 32,
+                      ),
                       label: const Text('Continue with Google'),
                       style: _outlineStyle,
                     ),
@@ -203,7 +205,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: OutlinedButton.icon(
                       onPressed: () =>
                           _showSnackBar('Login dengan Facebook belum tersedia'),
-                      icon: const _FacebookLogo(size: 20),
+                      icon: Image.asset(
+                        'assets/icons/facebook-icon.png',
+                        width: 42,
+                        height: 42,
+                      ),
                       label: const Text('Continue with Facebook'),
                       style: _outlineStyle,
                     ),
@@ -319,101 +325,4 @@ class _AppLogoPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _AppLogoPainter oldDelegate) => false;
-}
-
-class _GoogleLogo extends StatelessWidget {
-  const _GoogleLogo({required this.size});
-
-  final double size;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(size: Size.square(size), painter: _GoogleLogoPainter());
-  }
-}
-
-class _GoogleLogoPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final d = size.shortestSide;
-    final strokeWidth = d * 0.115;
-    final radius = (d - strokeWidth) / 2;
-    final center = Offset(d / 2, d / 2);
-    final rect = Rect.fromCircle(center: center, radius: radius);
-    final stroke = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth
-      ..strokeCap = StrokeCap.round;
-
-    // Arc start/end angles split by small gaps at the diagonal joints and a
-    // wider opening on the right where the horizontal bar sits.
-    const joints = <(Color, double, double)>[
-      (Color(0xFF4285F4), 228, 84), // blue, top
-      (Color(0xFF34A853), 318, 36), // green, above opening
-      (Color(0xFF34A853), 6, 36), // green, below opening
-      (Color(0xFFFBBC05), 48, 84), // yellow, bottom
-      (Color(0xFFEA4335), 138, 84), // red, left
-    ];
-    for (final (color, start, sweep) in joints) {
-      stroke.color = color;
-      canvas.drawArc(rect, _radians(start), _radians(sweep), false, stroke);
-    }
-
-    // Horizontal green bar reaching inward from the right side of the ring.
-    final startX = center.dx + radius - strokeWidth / 2;
-    final tipX = center.dx + radius * 0.52 - strokeWidth / 2;
-    stroke.color = const Color(0xFF34A853);
-    canvas.drawLine(Offset(startX, center.dy), Offset(tipX, center.dy), stroke);
-  }
-
-  @override
-  bool shouldRepaint(covariant _GoogleLogoPainter oldDelegate) => false;
-}
-
-double _radians(double degrees) => degrees * math.pi / 180;
-
-class _FacebookLogo extends StatelessWidget {
-  const _FacebookLogo({required this.size});
-
-  final double size;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      size: Size.square(size),
-      painter: _FacebookLogoPainter(),
-    );
-  }
-}
-
-class _FacebookLogoPainter extends CustomPainter {
-  static const _blue = Color(0xFF1877F2);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final d = size.shortestSide;
-    canvas.drawCircle(Offset(d / 2, d / 2), d / 2, Paint()..color = _blue);
-
-    final textPainter = TextPainter(
-      text: TextSpan(
-        text: 'f',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: d * 0.68,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-      textDirection: TextDirection.ltr,
-    )..layout();
-    textPainter.paint(
-      canvas,
-      Offset(
-        d / 2 - textPainter.width / 2,
-        d / 2 - textPainter.height / 2 - d * 0.02,
-      ),
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant _FacebookLogoPainter oldDelegate) => false;
 }
