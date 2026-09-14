@@ -15,58 +15,60 @@ class SidebarWelcome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Expanded(
-                child: Text(
-                  'Student Assistant',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 15.5,
-                    fontWeight: FontWeight.w700,
-                    color: _dark,
+      padding: const EdgeInsets.fromLTRB(18, 8, 18, 16),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Expanded(
+                  child: Text(
+                    'Student Assistant',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 15.5,
+                      fontWeight: FontWeight.w700,
+                      color: _dark,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              _CircleButton(
-                icon: Icons.add,
-                size: 22,
-                onTap: () => _placeholder(context, 'Fitur belum tersedia'),
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          _SearchPill(
-            onTap: () => _placeholder(context, 'Fitur belum tersedia'),
-          ),
-          const SizedBox(height: 18),
-          _RowItem(
-            icon: Icons.grid_view_rounded,
-            label: 'More Tools+',
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(builder: (_) => const ToolMenuScreen()),
-              );
-            },
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'Chats',
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: _greys,
+                const SizedBox(width: 8),
+                _CircleButton(
+                  icon: Icons.add,
+                  size: 22,
+                  onTap: () => _placeholder(context, 'Fitur belum tersedia'),
+                ),
+              ],
             ),
-          ),
-          const Expanded(child: SizedBox()),
-        ],
+            const SizedBox(height: 14),
+            _SearchPill(
+              onTap: () => _placeholder(context, 'Fitur belum tersedia'),
+            ),
+            const SizedBox(height: 18),
+            _RowItem(
+              icon: Icons.grid_view_rounded,
+              label: 'More Tools+',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const ToolMenuScreen()),
+                );
+              },
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Chats',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: _greys,
+              ),
+            ),
+            const Expanded(child: SizedBox()),
+          ],
+        ),
       ),
     );
   }
