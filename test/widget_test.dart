@@ -212,6 +212,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Today • 10k User'), findsOneWidget);
+    expect(find.byType(Image), findsNWidgets(12));
     expect(find.text('Makalah'), findsNWidgets(2));
     expect(find.text('Paraphrase'), findsNWidgets(2));
     expect(find.text('CodeX'), findsNWidgets(2));
@@ -263,9 +264,67 @@ void main() {
     expect(find.text('Upload Files'), findsOneWidget);
     expect(find.text('Browse Files'), findsOneWidget);
 
-    await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded));
+    tester.state<NavigatorState>(find.byType(Navigator)).pop();
     await tester.pumpAndSettle();
 
     expect(find.text('Search tool'), findsOneWidget);
+  });
+
+  testWidgets('CodeX opens from Unggulan row', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('CodeX').first);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Lets Build'), findsOneWidget);
+    expect(find.text('What would you like to know?'), findsOneWidget);
+  });
+
+  testWidgets('CodeX chat types a response after send', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('CodeX').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Lets Build'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'teks yang diabaikan');
+    await tester.pump();
+    await tester.tap(find.byIcon(Icons.arrow_upward));
+    await tester.pump();
+
+    expect(
+      find.text('Hey Flippy! Write me a script for building an Analog Clock.'),
+      findsOneWidget,
+    );
+    expect(find.text('teks yang diabaikan'), findsNothing);
+    expect(find.text('Lets Build'), findsNothing);
+
+    await tester.pump(const Duration(seconds: 30));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Typescript code block'), findsOneWidget);
+    expect(find.textContaining('AnalogClock'), findsOneWidget);
+    expect(find.textContaining('London'), findsWidgets);
   });
 }
