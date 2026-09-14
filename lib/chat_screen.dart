@@ -18,13 +18,15 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: _panel,
       drawer: const SidebarWelcomeDrawer(),
-      body: const Column(
-        children: [
-          _Header(),
-          Divider(height: 1, thickness: 1, color: _border),
-          Expanded(child: _HeroCenter()),
-          _InputBar(),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            _Header(),
+            Divider(height: 1, thickness: 1, color: _border),
+            Expanded(child: _HeroCenter()),
+            _InputBar(),
+          ],
+        ),
       ),
     );
   }
@@ -36,7 +38,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18, 18, 18, 14),
+      padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -181,7 +183,7 @@ class _InputBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(14, 10, 14, 16),
+      padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
       decoration: const BoxDecoration(
         border: Border(top: BorderSide(color: _border)),
       ),
