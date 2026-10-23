@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-import 'profile.dart';
-import 'widgets/sidebar.dart';
+import '../profile.dart';
+import '../widgets/sidebar.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
 const Color _border = Color(0xFFE8E8EA);
@@ -21,6 +21,7 @@ class MathChatScreen extends StatefulWidget {
 
 class _MathChatScreenState extends State<MathChatScreen> {
   bool _isFileUploaded = false;
+  String _uploadedFileName = '';
   bool _isChatSubmitted = false;
   String _userSubmittedQuestion = '';
 
@@ -63,6 +64,15 @@ The real solutions are \$(3, 4)\$ and \$(4, 3)\$.''';
   void _handleUploadFile() {
     setState(() {
       _isFileUploaded = true;
+      _uploadedFileName = 'math_problem.png';
+    });
+  }
+
+  // Handler hapus file
+  void _handleRemoveFile() {
+    setState(() {
+      _isFileUploaded = false;
+      _uploadedFileName = '';
     });
   }
 
@@ -75,6 +85,8 @@ The real solutions are \$(3, 4)\$ and \$(4, 3)\$.''';
       _isChatSubmitted = true;
       _displayedAiText = '';
     });
+
+    _handleRemoveFile();
 
     _typewriterTimer?.cancel();
     int currentIndex = 0;
@@ -116,13 +128,13 @@ The real solutions are \$(3, 4)\$ and \$(4, 3)\$.''';
                       userQuestion: _userSubmittedQuestion,
                       aiResponseText: _displayedAiText,
                     )
-                  : _HeroCenter(
-                      isFileUploaded: _isFileUploaded,
-                      onUploadTap: _handleUploadFile,
-                    ),
+                  : const _HeroCenter(),
             ),
             _InputBar(
               isFileUploaded: _isFileUploaded,
+              fileName: _uploadedFileName,
+              onUploadPressed: _handleUploadFile,
+              onRemoveFilePressed: _handleRemoveFile,
               onSendPressed: _handleSendMessage,
             ),
           ],
@@ -190,148 +202,59 @@ class _Hamburger extends StatelessWidget {
   }
 }
 
-// ==================== CENTER CONTENT (UPLOAD / DEFAULT) ====================
-class _HeroCenter extends StatelessWidget {
-  const _HeroCenter({required this.isFileUploaded, required this.onUploadTap});
+class _AvatarButton extends StatelessWidget {
+  const _AvatarButton();
 
-  final bool isFileUploaded;
-  final VoidCallback onUploadTap;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute<void>(builder: (_) => const ProfileScreen()));
+      },
+      child: const SizedBox(
+        width: 40,
+        height: 40,
+        child: CircleAvatar(
+          backgroundColor: _greyBg,
+          child: Icon(Icons.person, size: 22, color: _dark),
+        ),
+      ),
+    );
+  }
+}
+
+// ==================== HERO CENTER (TAMPILAN AWAL) ====================
+class _HeroCenter extends StatelessWidget {
+  const _HeroCenter();
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (!isFileUploaded)
-              GestureDetector(
-                onTap: onUploadTap,
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 36,
-                    horizontal: 20,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: const Color(0xFFDCDCE0),
-                      width: 1.5,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 48,
-                        height: 48,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFFF0F0F5),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.cloud_upload_outlined,
-                          color: _dark,
-                          size: 24,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'Upload Files',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: _dark,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      const Text(
-                        'Drag and drop or click to browse',
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Color(0xFF8E8E93),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 18,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF14142B),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Text(
-                          'Browse Files',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      const Text(
-                        'Supports PDF, PNG, JPG, or SVG up to 10MB',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Color(0xFFA0A0A5),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            else
-              // Tampilan setelah file diupload
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF7F7F8),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFE5E5EA)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.insert_drive_file,
-                      color: Colors.blue,
-                      size: 36,
-                    ),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'math_assignment.pdf',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: _dark,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'File uploaded successfully • Ready to query',
-                            style: TextStyle(fontSize: 12, color: Colors.green),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(
-                      Icons.check_circle,
-                      color: Colors.green,
-                      size: 22,
-                    ),
-                  ],
-                ),
-              ),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset('assets/icons/math-icon.png', width: 80, height: 80),
+          SizedBox(height: 16),
+          Text(
+            'Math Assistant',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: _dark,
+              letterSpacing: -0.3,
+            ),
+          ),
+          SizedBox(height: 6),
+          Text(
+            'AI Student Assistant',
+            style: TextStyle(
+              fontSize: 14,
+              color: Color(0xFF8E8E93),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -352,7 +275,6 @@ class _ChatStreamView extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       children: [
-        // Pertanyaan yang diinput oleh pengguna
         Align(
           alignment: Alignment.centerRight,
           child: Container(
@@ -369,8 +291,6 @@ class _ChatStreamView extends StatelessWidget {
             ),
           ),
         ),
-
-        // Respon AI
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -400,36 +320,22 @@ class _ChatStreamView extends StatelessWidget {
 
 // ==================== INPUT BAR ====================
 class _InputBar extends StatefulWidget {
-  const _InputBar({required this.isFileUploaded, required this.onSendPressed});
+  const _InputBar({
+    required this.isFileUploaded,
+    required this.fileName,
+    required this.onUploadPressed,
+    required this.onRemoveFilePressed,
+    required this.onSendPressed,
+  });
 
   final bool isFileUploaded;
+  final String fileName;
+  final VoidCallback onUploadPressed;
+  final VoidCallback onRemoveFilePressed;
   final Function(String) onSendPressed;
 
   @override
   State<_InputBar> createState() => _InputBarState();
-}
-
-class _AvatarButton extends StatelessWidget {
-  const _AvatarButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(
-          context,
-        ).push(MaterialPageRoute<void>(builder: (_) => const ProfileScreen()));
-      },
-      child: const SizedBox(
-        width: 40,
-        height: 40,
-        child: CircleAvatar(
-          backgroundColor: _greyBg,
-          child: Icon(Icons.person, size: 22, color: _dark),
-        ),
-      ),
-    );
-  }
 }
 
 class _InputBarState extends State<_InputBar> {
@@ -462,7 +368,7 @@ class _InputBarState extends State<_InputBar> {
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
       child: Container(
-        padding: const EdgeInsets.fromLTRB(16, 8, 10, 8),
+        padding: const EdgeInsets.fromLTRB(16, 12, 12, 10),
         constraints: const BoxConstraints(minHeight: 100),
         decoration: BoxDecoration(
           color: _panel,
@@ -473,21 +379,91 @@ class _InputBarState extends State<_InputBar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              controller: _controller,
-              maxLines: null,
-              style: const TextStyle(fontSize: 13.5, color: _dark),
-              decoration: const InputDecoration(
-                hintText: 'What would you like to know?',
-                hintStyle: TextStyle(fontSize: 13.5, color: _placeholderGrey),
-                border: InputBorder.none,
-                isDense: true,
-                contentPadding: EdgeInsets.only(top: 4, bottom: 8),
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (widget.isFileUploaded) ...[
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF2F2F7),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: const Color(0xFFE5E5EA)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.insert_drive_file_outlined,
+                          size: 16,
+                          color: _dark,
+                        ),
+                        const SizedBox(width: 6),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 180),
+                          child: Text(
+                            widget.fileName.isNotEmpty
+                                ? widget.fileName
+                                : 'math_problem.png',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: _dark,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        GestureDetector(
+                          onTap: widget.onRemoveFilePressed,
+                          child: const Icon(
+                            Icons.close,
+                            size: 16,
+                            color: Color(0xFF8E8E93),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+                TextField(
+                  controller: _controller,
+                  maxLines: null,
+                  style: const TextStyle(fontSize: 13.5, color: _dark),
+                  decoration: const InputDecoration(
+                    hintText: 'What would you like to know?',
+                    hintStyle: TextStyle(
+                      fontSize: 13.5,
+                      color: _placeholderGrey,
+                    ),
+                    border: InputBorder.none,
+                    isDense: true,
+                    contentPadding: EdgeInsets.only(top: 4, bottom: 8),
+                  ),
+                ),
+              ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                GestureDetector(
+                  onTap: widget.onUploadPressed,
+                  child: Container(
+                    width: 32,
+                    height: 32,
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.add,
+                      size: 24,
+                      color: _dark,
+                    ),
+                  ),
+                ),
                 GestureDetector(
                   onTap: () {
                     if (canSend) {
@@ -495,9 +471,7 @@ class _InputBarState extends State<_InputBar> {
                           ? 'Solve the uploaded math problem.'
                           : _controller.text.trim();
 
-                      // Kosongkan input teks setelah mengirim
                       _controller.clear();
-
                       widget.onSendPressed(messageText);
                     }
                   },
