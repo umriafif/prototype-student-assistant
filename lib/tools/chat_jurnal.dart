@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'profile.dart';
-import 'widgets/sidebar.dart';
+import '../profile.dart';
+import '../widgets/sidebar.dart';
 
 const Color _panel = Color(0xFFFFFFFF);
 const Color _border = Color(0xFFE8E8EA);

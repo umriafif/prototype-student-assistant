@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'chat_math.dart';
-import 'codex_chat_screen.dart';
+import 'tools/chat_math.dart';
+import 'tools/codex_chat_screen.dart';
 import 'profile.dart';
-import 'chat_jurnal.dart';
-import 'chat_summarize.dart';
-import 'chat_citation.dart';
-import 'chat_translate.dart';
+import 'tools/chat_jurnal.dart';
+import 'tools/chat_summarize.dart';
+import 'tools/chat_citation.dart';
+import 'tools/chat_translate.dart';
 
 const _dark = Color(0xFF1C1C1E);
 const _greys = Color(0xFF8E8E93);
