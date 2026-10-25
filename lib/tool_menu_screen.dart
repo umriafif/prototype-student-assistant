@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'chat_math.dart';
+import 'chat_makalah.dart';
 import 'codex_chat_screen.dart';
 import 'profile.dart';
 import 'chat_jurnal.dart';
@@ -126,6 +127,8 @@ void _openTool(BuildContext context, String title) {
   Widget? screen;
   if (title == 'CodeX') {
     screen = const CodexChatScreen();
+  } else if (title == 'Makalah') {
+    screen = const MakalahScreen();
   } else if (title == 'Math') {
     screen = const MathChatScreen();
   } else if (title == 'Journal Search') {

@@ -63,7 +63,9 @@ class Sidebar extends StatelessWidget {
               label: 'More Tools+',
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const ToolMenuScreen()),
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ToolMenuScreen(),
+                  ),
                 );
               },
             ),
@@ -85,7 +87,8 @@ class Sidebar extends StatelessWidget {
                     _ChatItem(
                       title: _sampleChats[i],
                       active: i == 0,
-                      onTap: () => _placeholder(context, 'Fitur belum tersedia'),
+                      onTap: () =>
+                          _placeholder(context, 'Fitur belum tersedia'),
                     ),
                 ],
               ),
@@ -94,12 +97,16 @@ class Sidebar extends StatelessWidget {
             _FooterRow(
               onProfile: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const ProfileScreen()),
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ProfileScreen(),
+                  ),
                 );
               },
               onSettings: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const ProfileScreen()),
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ProfileScreen(),
+                  ),
                 );
               },
             ),

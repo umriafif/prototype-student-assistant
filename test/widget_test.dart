@@ -327,4 +327,78 @@ void main() {
     expect(find.textContaining('AnalogClock'), findsOneWidget);
     expect(find.textContaining('London'), findsWidgets);
   });
+
+  testWidgets('Tool menu Makalah button opens chat_makalah', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Makalah').first);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Asisten Makalah'), findsOneWidget);
+    expect(find.text('Detail Makalah'), findsOneWidget);
+    expect(
+      find.text('Masukkan deskripsi makalah\nyang akan anda buat'),
+      findsOneWidget,
+    );
+    expect(find.text('Judul'), findsOneWidget);
+    expect(find.text('Masukkan Judul'), findsOneWidget);
+    expect(find.text('Sub Bab'), findsOneWidget);
+    expect(find.text('Rumusan Masalah'), findsOneWidget);
+    expect(find.text('Keterangan'), findsOneWidget);
+    expect(find.text('Jelaskan Makalah Anda Sedeatil Mungkin'), findsOneWidget);
+    expect(find.text('0/1000 Karakter'), findsOneWidget);
+    expect(find.text('Clear'), findsOneWidget);
+    expect(find.text('Generate'), findsOneWidget);
+
+    // Test typing and Clear button
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Masukkan Judul'),
+      'Kecerdasan Buatan',
+    );
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Jelaskan Makalah Anda Sedeatil Mungkin'),
+      'Deskripsi makalah AI',
+    );
+    await tester.pump();
+    expect(find.text('20/1000 Karakter'), findsOneWidget);
+
+    await tester.tap(find.text('Clear'));
+    await tester.pump();
+    expect(find.text('0/1000 Karakter'), findsOneWidget);
+    expect(find.text('Masukkan Judul'), findsOneWidget);
+
+    // Test Generate button (Gambar 2 transition)
+    await tester.tap(find.text('Generate'));
+    await tester.pump();
+
+    // Clear is hidden after generate
+    expect(find.text('Clear'), findsNothing);
+
+    // Pump typewriter stream
+    await tester.pump(const Duration(seconds: 30));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Lorem ipsum dolor sit amet'), findsWidgets);
+    expect(find.textContaining('Suspendisse imperdiet sem'), findsWidgets);
+
+    // Typing into form resets back to Gambar 1 state
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Masukkan Judul'),
+      'Judul Baru',
+    );
+    await tester.pump();
+    expect(find.text('Clear'), findsOneWidget);
+    expect(find.textContaining('Lorem ipsum dolor sit amet'), findsNothing);
+  });
 }

@@ -53,7 +53,9 @@ class SidebarWelcome extends StatelessWidget {
               label: 'More Tools+',
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const ToolMenuScreen()),
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ToolMenuScreen(),
+                  ),
                 );
               },
             ),
