@@ -327,4 +327,116 @@ void main() {
     expect(find.textContaining('AnalogClock'), findsOneWidget);
     expect(find.textContaining('London'), findsWidgets);
   });
+
+  testWidgets('Tool menu Makalah button opens chat_makalah', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Makalah').first);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Asisten Makalah'), findsOneWidget);
+    expect(find.text('Detail Makalah'), findsOneWidget);
+    expect(find.text('Masukkan  deskripsi makalah\nyang akan anda buat'), findsOneWidget);
+    expect(find.text('Judul'), findsOneWidget);
+    expect(find.text('Sub Bab'), findsOneWidget);
+    expect(find.text('Keterangan'), findsOneWidget);
+    expect(find.text('Clear'), findsOneWidget);
+    expect(find.text('Generate'), findsOneWidget);
+
+    await tester.tap(find.text('Generate'));
+    await tester.pump();
+    expect(find.text('Clear'), findsNothing);
+  });
+
+  testWidgets('Tool menu Paraphrase button opens chat_paraphrase', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Paraphrase').first);
+    await tester.pumpAndSettle();
+
+    expect(find.text('AI Paraphraser'), findsOneWidget);
+    expect(find.text('Masukkan Teks Yang Akan\nDiparaphrase'), findsOneWidget);
+    expect(find.text('86/400 Kata-kata'), findsOneWidget);
+    expect(find.text('Clear'), findsOneWidget);
+    expect(find.text('Paraphrase'), findsWidgets);
+
+    // Tap Paraphrase button
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Paraphrase'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Hasil'), findsOneWidget);
+    expect(find.text('Paraphrasing Tool'), findsOneWidget);
+    expect(find.text('Try Again'), findsOneWidget);
+    expect(find.text('Copy'), findsOneWidget);
+
+    // Tap Try Again
+    await tester.tap(find.text('Try Again'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('AI Paraphraser'), findsOneWidget);
+  });
+
+  testWidgets('Tool menu Grammar button opens chat_grammar', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const AIStudentAssistantApp());
+    await tester.tap(find.byKey(const ValueKey('hamburger')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('More Tools+'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Grammar'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('AI Grammar Checker'), findsOneWidget);
+    expect(find.text('Masukkan Teks Yang Akan\nDicek'), findsOneWidget);
+    expect(find.text('77 characters , 11 words'), findsOneWidget);
+    expect(find.text('Check'), findsOneWidget);
+
+    // Tap Check
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Check'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Result'), findsOneWidget);
+    expect(find.text('Done'), findsOneWidget);
+    expect(find.text('Back'), findsOneWidget);
+    expect(find.text('Edit'), findsOneWidget);
+    expect(find.textContaining('The revenue growth was'), findsOneWidget);
+    expect(find.textContaining('substantial'), findsOneWidget);
+    expect(find.textContaining('dramatically'), findsOneWidget);
+    expect(find.textContaining('significant rise'), findsOneWidget);
+
+    // Tap Back
+    await tester.tap(find.text('Back'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Check'), findsOneWidget);
+  });
 }
