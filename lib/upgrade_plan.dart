@@ -144,7 +144,7 @@ class UpgradePlanScreen extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Text(
-                        'Upgrade seharga Rp1,2 triliun',
+                        'Upgrade seharga Rp18.000',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 14,
