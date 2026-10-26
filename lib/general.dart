@@ -196,77 +196,104 @@ class _InfoCard extends StatelessWidget {
   }
 }
 
-class _ToggleCard extends StatelessWidget {
+class _ToggleCard extends StatefulWidget {
   const _ToggleCard({required this.title, required this.subtitle});
 
   final String title;
   final String subtitle;
 
   @override
+  State<_ToggleCard> createState() => _ToggleCardState();
+}
+
+class _ToggleCardState extends State<_ToggleCard> {
+  bool _isEnabled = true;
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: _panel,
-            border: Border.all(color: _border),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x08000000),
-                blurRadius: 10,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    color: _textPrimary,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Container(
-                width: 44,
-                height: 24,
-                padding: const EdgeInsets.all(2),
+        Semantics(
+          button: true,
+          label: widget.title,
+          value: _isEnabled ? 'Aktif' : 'Nonaktif',
+          toggled: _isEnabled,
+          child: ExcludeSemantics(
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () {
+                setState(() {
+                  _isEnabled = !_isEnabled;
+                });
+              },
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF111111),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    width: 20,
-                    height: 20,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x26000000),
-                          blurRadius: 3,
-                          offset: Offset(0, 1),
-                        ),
-                      ],
+                  color: _panel,
+                  border: Border.all(color: _border),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x08000000),
+                      blurRadius: 10,
+                      offset: Offset(0, 2),
                     ),
-                  ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.title,
+                        style: const TextStyle(
+                          color: _textPrimary,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 180),
+                      width: 44,
+                      height: 24,
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: _isEnabled ? const Color(0xFF111111) : _border,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: AnimatedAlign(
+                        duration: const Duration(milliseconds: 180),
+                        alignment: _isEnabled
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0x26000000),
+                                blurRadius: 3,
+                                offset: Offset(0, 1),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
         const SizedBox(height: 6),
         Text(
-          subtitle,
+          widget.subtitle,
           style: const TextStyle(
             color: _textSecondary,
             fontSize: 12,

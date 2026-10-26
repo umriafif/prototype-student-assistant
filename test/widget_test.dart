@@ -2,10 +2,64 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ai_student_assistant/main.dart';
+import 'package:ai_student_assistant/general.dart';
+import 'package:ai_student_assistant/memory.dart';
 import 'package:ai_student_assistant/widgets/sidebar.dart';
 import 'package:ai_student_assistant/widgets/sidebar_welcome.dart';
 
 void main() {
+  testWidgets('General web search toggle switches on and off', (
+    WidgetTester tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const MaterialApp(home: GeneralScreen()));
+
+    var semantics = tester.getSemantics(find.bySemanticsLabel('Pencarian web'));
+    expect(semantics.value, 'Aktif');
+
+    await tester.tap(find.text('Pencarian web'));
+    await tester.pumpAndSettle();
+
+    semantics = tester.getSemantics(find.bySemanticsLabel('Pencarian web'));
+    expect(semantics.value, 'Nonaktif');
+
+    await tester.tap(find.text('Pencarian web'));
+    await tester.pumpAndSettle();
+
+    semantics = tester.getSemantics(find.bySemanticsLabel('Pencarian web'));
+    expect(semantics.value, 'Aktif');
+  });
+
+  testWidgets('Memory toggle switches on and off', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const MaterialApp(home: MemoryScreen()));
+
+    var semantics = tester.getSemantics(
+      find.bySemanticsLabel('Aktifkan memori'),
+    );
+    expect(semantics.value, 'Aktif');
+
+    await tester.tap(find.text('Aktifkan memori'));
+    await tester.pumpAndSettle();
+
+    semantics = tester.getSemantics(find.bySemanticsLabel('Aktifkan memori'));
+    expect(semantics.value, 'Nonaktif');
+
+    await tester.tap(find.text('Aktifkan memori'));
+    await tester.pumpAndSettle();
+
+    semantics = tester.getSemantics(find.bySemanticsLabel('Aktifkan memori'));
+    expect(semantics.value, 'Aktif');
+  });
+
   testWidgets('Chat screen renders', (WidgetTester tester) async {
     await tester.pumpWidget(const AIStudentAssistantApp());
 
@@ -347,7 +401,10 @@ void main() {
 
     expect(find.text('Asisten Makalah'), findsOneWidget);
     expect(find.text('Detail Makalah'), findsOneWidget);
-    expect(find.text('Masukkan  deskripsi makalah\nyang akan anda buat'), findsOneWidget);
+    expect(
+      find.text('Masukkan  deskripsi makalah\nyang akan anda buat'),
+      findsOneWidget,
+    );
     expect(find.text('Judul'), findsOneWidget);
     expect(find.text('Sub Bab'), findsOneWidget);
     expect(find.text('Keterangan'), findsOneWidget);
