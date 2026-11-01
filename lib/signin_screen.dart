@@ -301,28 +301,11 @@ class _AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(size: Size.square(size), painter: _AppLogoPainter());
+    return Image.asset(
+      'assets/logos/logo-app.png',
+      width: size,
+      height: size,
+      fit: BoxFit.contain,
+    );
   }
-}
-
-class _AppLogoPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final s = size.width;
-    final paint = Paint()..color = const Color(0xFF1C1C1E);
-    final lobes = [
-      (Offset(s * 0.5, s * 0.62), s * 0.33),
-      (Offset(s * 0.26, s * 0.42), s * 0.24),
-      (Offset(s * 0.74, s * 0.42), s * 0.24),
-      (Offset(s * 0.5, s * 0.2), s * 0.17),
-      (Offset(s * 0.42, s * 0.78), s * 0.09),
-      (Offset(s * 0.58, s * 0.78), s * 0.09),
-    ];
-    for (final (center, radius) in lobes) {
-      canvas.drawCircle(center, radius, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _AppLogoPainter oldDelegate) => false;
 }
