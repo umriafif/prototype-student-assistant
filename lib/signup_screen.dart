@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'tool_menu_screen.dart';
 import 'signin_screen.dart';
 
 const _primary = Color(0xFF1C1C1E);
@@ -58,7 +59,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _onSignUp() {
     if (!_formKey.currentState!.validate()) return;
-    _showSnackBar('Registrasi berhasil (demo)');
+    // _showSnackBar('Registrasi berhasil (demo)');
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => ToolMenuScreen()),
+      (Route<dynamic> route) => false, // false berarti hapus semua halaman lama
+    );
   }
 
   InputDecoration _decoration(String hint) {
@@ -205,7 +211,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 50,
                     child: OutlinedButton.icon(
                       onPressed: () =>
-                          _showSnackBar('Login dengan Google belum tersedia'),
+                          Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => ToolMenuScreen()),
+                          (Route<dynamic> route) => false, // false berarti hapus semua halaman lama
+                        ),
                       icon: Image.asset(
                         'assets/icons/google-icon.png',
                         width: 32,
@@ -220,7 +230,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 50,
                     child: OutlinedButton.icon(
                       onPressed: () =>
-                          _showSnackBar('Login dengan Facebook belum tersedia'),
+                          Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => ToolMenuScreen()),
+                          (Route<dynamic> route) => false, // false berarti hapus semua halaman lama
+                        ),
                       icon: Image.asset(
                         'assets/icons/facebook-icon.png',
                         width: 42,
