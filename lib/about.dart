@@ -86,13 +86,6 @@ class _TopBar extends StatelessWidget {
               color: _panel,
               border: Border.all(color: _border),
               borderRadius: BorderRadius.circular(24),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x0A000000),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
             ),
             child: const Center(
               child: Icon(
@@ -152,13 +145,6 @@ class _AboutCard extends StatelessWidget {
         color: _panel,
         border: Border.all(color: _border),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x08000000),
-            blurRadius: 10,
-            offset: Offset(0, 2),
-          ),
-        ],
       ),
       child: Row(
         children: [

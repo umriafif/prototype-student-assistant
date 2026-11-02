@@ -58,15 +58,17 @@ class NotificationScreen extends StatelessWidget {
                 mediaQuery.padding.top -
                 mediaQuery.padding.bottom,
             decoration: const BoxDecoration(color: _panel),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _TopBar(),
-                  const SizedBox(height: 20),
-                  const _NotificationList(),
-                ],
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const _TopBar(),
+                    const SizedBox(height: 20),
+                    const _NotificationList(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -92,13 +94,6 @@ class _TopBar extends StatelessWidget {
               color: _panel,
               border: Border.all(color: _border),
               borderRadius: BorderRadius.circular(24),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x0A000000),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
             ),
             child: const Center(
               child: Icon(
@@ -162,13 +157,6 @@ class _NotificationCard extends StatelessWidget {
         color: _panel,
         border: Border.all(color: _border),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x08000000),
-            blurRadius: 10,
-            offset: Offset(0, 2),
-          ),
-        ],
       ),
       child: Row(
         children: [

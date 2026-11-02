@@ -95,12 +95,12 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 20),
-                    _SectionTitle('Akun'),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 20),
+                    const _SectionTitle('Akun'),
+                    const SizedBox(height: 12),
                     _ProfileTile(
                       title: 'Upgrade paket',
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.auto_awesome_outlined,
                         size: 18,
                         color: _dark,
@@ -113,19 +113,23 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 12),
-                    _ProfileTile(
+                    const SizedBox(height: 12),
+                    const _ProfileTile(
                       title: 'Email',
                       value: 'user@gmail.com',
                       hasValue: true,
                       icon: Icon(Icons.email_outlined, size: 18, color: _dark),
                     ),
-                    SizedBox(height: 20),
-                    _SectionTitle('Umum'),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 20),
+                    const _SectionTitle('Umum'),
+                    const SizedBox(height: 12),
                     _ProfileTile(
                       title: 'Umum',
-                      icon: Icon(Icons.settings_outlined, size: 18, color: _dark),
+                      icon: const Icon(
+                        Icons.settings_outlined,
+                        size: 18,
+                        color: _dark,
+                      ),
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute<void>(
@@ -134,10 +138,10 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     _ProfileTile(
                       title: 'Notifikasi',
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.notifications_none_outlined,
                         size: 18,
                         color: _dark,
@@ -150,10 +154,14 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     _ProfileTile(
                       title: 'Tentang',
-                      icon: Icon(Icons.info_outline, size: 18, color: _dark),
+                      icon: const Icon(
+                        Icons.info_outline,
+                        size: 18,
+                        color: _dark,
+                      ),
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute<void>(
@@ -162,10 +170,14 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     _ProfileTile(
                       title: 'Keluar',
-                      icon: Icon(Icons.logout_outlined, size: 18, color: _dark),
+                      icon: const Icon(
+                        Icons.logout_outlined,
+                        size: 18,
+                        color: _dark,
+                      ),
                       onTap: () {
                         showDialog<void>(
                           context: context,
@@ -174,7 +186,7 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                     ),
-                  ], 
+                  ],
                 ),
               ),
             ),
@@ -203,13 +215,6 @@ class _TopBar extends StatelessWidget {
               color: _panel,
               border: Border.all(color: _border),
               borderRadius: BorderRadius.circular(24),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x0A000000),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
             ),
             child: const Center(
               child: Icon(
@@ -256,13 +261,6 @@ class _AvatarCircle extends StatelessWidget {
         color: _panel,
         border: Border.all(color: _border),
         borderRadius: BorderRadius.circular(32),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x08000000),
-            blurRadius: 10,
-            offset: Offset(0, 2),
-          ),
-        ],
       ),
       child: const Center(
         child: Icon(Icons.person_outline, color: _dark, size: 28),
@@ -314,13 +312,6 @@ class _ProfileTile extends StatelessWidget {
         color: _panel,
         border: Border.all(color: _border),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x08000000),
-            blurRadius: 10,
-            offset: Offset(0, 2),
-          ),
-        ],
       ),
       child: Row(
         children: [
@@ -332,7 +323,7 @@ class _ProfileTile extends StatelessWidget {
                     TextSpan(
                       children: [
                         const TextSpan(
-                          text: 'Email     ',
+                          text: 'Email    ',
                           style: TextStyle(
                             color: _textPrimary,
                             fontSize: 15,
