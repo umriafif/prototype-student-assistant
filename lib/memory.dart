@@ -50,9 +50,9 @@ class MemoryScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _TopBar(),
+                  const _TopBar(),
                   const SizedBox(height: 20),
-                  _MemoryToggleCard(),
+                  const _MemoryToggleCard(),
                   const SizedBox(height: 12),
                   const _SummaryMemoryCard(),
                   const SizedBox(height: 20),
@@ -65,7 +65,7 @@ class MemoryScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  _InfoCard(title: 'Nama panggilan'),
+                  const _InfoCard(title: 'Nama panggilan'),
                   const SizedBox(height: 20),
                   const Text(
                     'Pekerjaan Anda',
@@ -76,7 +76,7 @@ class MemoryScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  _InfoCard(title: 'Pelajar, dll'),
+                  const _InfoCard(title: 'Pelajar, dll'),
                   const SizedBox(height: 20),
                   const Text(
                     'Info lainnya tentang Anda',
@@ -87,7 +87,7 @@ class MemoryScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  _InfoCard(
+                  const _InfoCard(
                     title: 'Preferensi, nilai, atau pilihan yang perlu diingat',
                     isMultiline: true,
                   ),
@@ -117,13 +117,6 @@ class _TopBar extends StatelessWidget {
               color: _panel,
               border: Border.all(color: _border),
               borderRadius: BorderRadius.circular(24),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x0A000000),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
             ),
             child: const Center(
               child: Icon(
@@ -152,13 +145,6 @@ class _TopBar extends StatelessWidget {
             color: _panel,
             border: Border.all(color: _border),
             borderRadius: BorderRadius.circular(24),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x0A000000),
-                blurRadius: 8,
-                offset: Offset(0, 2),
-              ),
-            ],
           ),
           child: const Center(child: Icon(Icons.check, size: 18, color: _dark)),
         ),
@@ -199,13 +185,6 @@ class _MemoryToggleCardState extends State<_MemoryToggleCard> {
               color: _panel,
               border: Border.all(color: _border),
               borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x08000000),
-                  blurRadius: 10,
-                  offset: Offset(0, 2),
-                ),
-              ],
             ),
             child: Row(
               children: [
@@ -239,13 +218,6 @@ class _MemoryToggleCardState extends State<_MemoryToggleCard> {
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x26000000),
-                            blurRadius: 3,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
                       ),
                     ),
                   ),
@@ -271,20 +243,13 @@ class _SummaryMemoryCard extends StatelessWidget {
         color: _panel,
         border: Border.all(color: _border),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x08000000),
-            blurRadius: 10,
-            offset: Offset(0, 2),
-          ),
-        ],
       ),
       child: Row(
         children: [
-          Expanded(
+          const Expanded(
             child: Text(
               'Ringkasan Memori',
-              style: const TextStyle(
+              style: TextStyle(
                 color: _textPrimary,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
@@ -313,13 +278,6 @@ class _InfoCard extends StatelessWidget {
         color: _panel,
         border: Border.all(color: _border),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x08000000),
-            blurRadius: 10,
-            offset: Offset(0, 2),
-          ),
-        ],
       ),
       child: Row(
         crossAxisAlignment: isMultiline

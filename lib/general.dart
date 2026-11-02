@@ -54,10 +54,10 @@ class GeneralScreen extends StatelessWidget {
                   const _TopBar(title: 'Umum'),
                   const SizedBox(height: 20),
                   const SizedBox(height: 12),
-                  _InfoCard(
+                  const _InfoCard(
                     title: 'Bahasa',
                     subtitle: 'Indonesia',
-                    trailing: const SizedBox.shrink(),
+                    trailing: SizedBox.shrink(),
                   ),
                   const SizedBox(height: 6),
                   const Text(
@@ -70,7 +70,7 @@ class GeneralScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const SizedBox(height: 12),
-                  _ToggleCard(
+                  const _ToggleCard(
                     title: 'Pencarian web',
                     subtitle: 'Telusuri web untuk info real-time',
                   ),
@@ -102,13 +102,6 @@ class _TopBar extends StatelessWidget {
               color: _panel,
               border: Border.all(color: _border),
               borderRadius: BorderRadius.circular(24),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x0A000000),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
             ),
             child: const Center(
               child: Icon(
@@ -155,13 +148,6 @@ class _InfoCard extends StatelessWidget {
         color: _panel,
         border: Border.all(color: _border),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x08000000),
-            blurRadius: 10,
-            offset: Offset(0, 2),
-          ),
-        ],
       ),
       child: Row(
         children: [
@@ -234,13 +220,6 @@ class _ToggleCardState extends State<_ToggleCard> {
                   color: _panel,
                   border: Border.all(color: _border),
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x08000000),
-                      blurRadius: 10,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
                 ),
                 child: Row(
                   children: [
@@ -274,13 +253,6 @@ class _ToggleCardState extends State<_ToggleCard> {
                           decoration: const BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0x26000000),
-                                blurRadius: 3,
-                                offset: Offset(0, 1),
-                              ),
-                            ],
                           ),
                         ),
                       ),
