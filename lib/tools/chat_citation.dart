@@ -76,9 +76,8 @@ class _CitationScreenState extends State<CitationScreen> {
                   horizontal: 24,
                   vertical: 20,
                 ),
-                child: _isCited
-                    ? _CiteResultView(onTryAgain: _handleTryAgain)
-                    : _CiteDefaultView(
+                child: Column(children: [
+                  _CiteDefaultView(
                         profileController: _journalProfileController,
                         selectedStyle: _selectedStyle,
                         citationStyles: _citationStyles,
@@ -90,7 +89,13 @@ class _CitationScreenState extends State<CitationScreen> {
                           }
                         },
                         onCite: _handleCite,
-                      ),
+                    ),
+
+                  _isCited
+                    ? _CiteResultView(onTryAgain: _handleTryAgain)
+                    : const SizedBox.shrink(),
+                  ],
+                ),  
               ),
             ),
           ],
@@ -195,7 +200,7 @@ class _CiteDefaultView extends StatelessWidget {
         const Icon(Icons.widgets_outlined, size: 52, color: _dark),
         const SizedBox(height: 12),
         const Text(
-          'Journal Search\nAssistant',
+          'Citation \nAssistant',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,
@@ -209,172 +214,136 @@ class _CiteDefaultView extends StatelessWidget {
           'AI Student Assistant',
           style: TextStyle(fontSize: 12.5, color: _placeholderGrey),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 32),
 
-        // Upload Card
-        GestureDetector(
-          onTap: onUploadTap,
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFFDCDCE0), width: 1.2),
-            ),
-            child: Column(
-              children: [
-                Container(
-                  width: 44,
-                  height: 44,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFF0F0F5),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.cloud_upload_outlined,
-                    color: _dark,
-                    size: 22,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  isFileUploaded ? 'file_document.pdf' : 'Upload Files',
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: _dark,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  isFileUploaded
-                      ? 'File uploaded • Ready to cite'
-                      : 'Drag and drop or click to browse',
-                  style: TextStyle(
-                    fontSize: 12.5,
-                    color: isFileUploaded
-                        ? Colors.green
-                        : const Color(0xFF8E8E93),
-                  ),
-                ),
-                if (!isFileUploaded) ...[
-                  const SizedBox(height: 14),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF14142B),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: const Text(
-                      'Browse Files',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12.5,
-                        fontWeight: FontWeight.w600,
+        // Unified Card (Sesuai Desain Referensi Gambar)
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Top Action Row (Book Dropdown & Cite Manually)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: const [
+                      Text(
+                        'Book',
+                        style: TextStyle(
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.w600,
+                          color: _dark,
+                        ),
                       ),
-                    ),
+                      SizedBox(width: 4),
+                      Icon(Icons.keyboard_arrow_down, size: 18, color: _dark),
+                    ],
                   ),
-                  const SizedBox(height: 18),
-                  const Text(
-                    'Supports PDF or DOCX up to 1MB',
-                    style: TextStyle(fontSize: 11, color: Color(0xFFA0A0A5)),
+                  Row(
+                    children: const [
+                      Text(
+                        'APA 7th Edition',
+                        style: TextStyle(
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.w600,
+                          color: _dark,
+                        ),
+                      ),
+                      SizedBox(width: 4),
+                      Icon(Icons.keyboard_arrow_down, size: 18, color: _dark),
+                    ],
                   ),
                 ],
-              ],
-            ),
-          ),
-        ),
+              ),
 
-        const SizedBox(height: 18),
+              const SizedBox(height: 12),
 
-        // Divider ATAU
-        Row(
-          children: const [
-            Expanded(child: Divider(color: _dividerBg, thickness: 2)),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                'ATAU',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF8E8E93),
+              // Search Input Bar dengan Tombol Cite di dalam Field
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: const Color(0xFFDCDCE0)),
+                ),
+                padding: const EdgeInsets.only(left: 12, right: 6, top: 4, bottom: 4),
+                child: Row(
+                  children: [
+                    const Icon(Icons.search, size: 20, color: _placeholderGrey),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        controller: profileController,
+                        style: const TextStyle(fontSize: 13.5, color: _dark),
+                        decoration: const InputDecoration(
+                          hintText: 'Search by ISBN or book title...',
+                          hintStyle: TextStyle(fontSize: 13, color: Color(0xFFA0A0A5)),
+                          border: InputBorder.none,
+                          isDense: true,
+                          contentPadding: EdgeInsets.symmetric(vertical: 8),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    ElevatedButton(
+                      onPressed: onCite,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _dark,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: const Text(
+                        'Cite',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Expanded(child: Divider(color: _dividerBg, thickness: 2)),
-          ],
-        ),
 
-        const SizedBox(height: 18),
+              const SizedBox(height: 12),
 
-        // Input Journal Profile
-        CrossSectionInput(
-          label: 'Journal Profile',
-          child: TextField(
-            controller: profileController,
-            style: const TextStyle(fontSize: 13.5, color: _dark),
-            decoration: const InputDecoration(
-              hintText: 'Cari berdasarkan Judul, DOI, URL, ISBN,or ..',
-              hintStyle: TextStyle(fontSize: 13, color: Color(0xFFA0A0A5)),
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 14,
-                vertical: 12,
-              ),
-              border: InputBorder.none,
-            ),
-          ),
-        ),
-
-        const SizedBox(height: 14),
-
-        // Dropdown Citation Style
-        CrossSectionInput(
-          label: 'Citation Style',
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-                value: selectedStyle,
-                isExpanded: true,
-                icon: const Icon(Icons.keyboard_arrow_down, color: _dark),
-                items: citationStyles.map((String style) {
-                  return DropdownMenuItem<String>(
-                    value: style,
-                    child: Text(
-                      style,
-                      style: const TextStyle(fontSize: 13.5, color: _dark),
+              // Bottom Action Row (Upload PDF Button / Status)
+              Align(
+                alignment: Alignment.centerRight,
+                child: InkWell(
+                  onTap: onUploadTap,
+                  borderRadius: BorderRadius.circular(6),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          isFileUploaded ? Icons.check_circle_outline : Icons.upload_file_rounded,
+                          size: 16,
+                          color: isFileUploaded ? Colors.green : const Color(0xFF555555),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          isFileUploaded ? 'file_document.pdf' : 'Upload PDF',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: isFileUploaded ? Colors.green : const Color(0xFF555555),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
-                  );
-                }).toList(),
-                onChanged: onStyleChanged,
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-
-        const SizedBox(height: 20),
-
-        // Button Cite
-        ElevatedButton.icon(
-          onPressed: onCite,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: _dark,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 0,
-          ),
-          icon: const Icon(Icons.link, size: 18),
-          label: const Text(
-            'Cite',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            ],
           ),
         ),
       ],
