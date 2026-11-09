@@ -235,19 +235,18 @@ class _MakalahScreenState extends State<MakalahScreen> {
                             color: _dark,
                             size: 22,
                           ),
-                          items:
-                              _subBabOptions.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: const TextStyle(
-                                      fontSize: 13.5,
-                                      color: _dark,
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
+                          items: _subBabOptions.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: const TextStyle(
+                                  fontSize: 13.5,
+                                  color: _dark,
+                                ),
+                              ),
+                            );
+                          }).toList(),
                           onChanged: _handleSubBabChanged,
                         ),
                       ),
@@ -284,7 +283,8 @@ class _MakalahScreenState extends State<MakalahScreen> {
                               color: _dark,
                             ),
                             decoration: const InputDecoration(
-                              hintText: 'Jelaskan Makalah Anda Sedeatil Mungkin',
+                              hintText:
+                                  'Jelaskan Makalah Anda Sedeatil Mungkin',
                               hintStyle: TextStyle(
                                 fontSize: 13.5,
                                 color: _placeholderGrey,
@@ -414,26 +414,13 @@ class _Hamburger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      key: const ValueKey('hamburger'),
-      onTap: () => Scaffold.of(context).openDrawer(),
-      behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        width: 22,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (var i = 0; i < 3; i++) ...[
-              Container(
-                height: 2.2,
-                decoration: BoxDecoration(
-                  color: _dark,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              if (i < 2) const SizedBox(height: 5),
-            ],
-          ],
-        ),
+      onTap: () {
+        Scaffold.of(context).openDrawer();
+      },
+      child: const SizedBox(
+        width: 40,
+        height: 40,
+        child: Icon(Icons.menu, size: 32, color: _dark),
       ),
     );
   }
@@ -455,10 +442,9 @@ class _GenerateButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: isEnabled ? _dark : const Color(0xFFE5E5EA),
           borderRadius: BorderRadius.circular(8),
-          border:
-              isEnabled
-                  ? null
-                  : Border.all(color: const Color(0xFF9E9E9E), width: 1),
+          border: isEnabled
+              ? null
+              : Border.all(color: const Color(0xFF9E9E9E), width: 1),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -488,11 +474,10 @@ class _GenerateButton extends StatelessWidget {
 class _ResizeHandlePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = const Color(0xFFC2C2C6)
-          ..strokeWidth = 1.0
-          ..strokeCap = StrokeCap.round;
+    final paint = Paint()
+      ..color = const Color(0xFFC2C2C6)
+      ..strokeWidth = 1.0
+      ..strokeCap = StrokeCap.round;
 
     canvas.drawLine(
       Offset(size.width - 2, size.height),

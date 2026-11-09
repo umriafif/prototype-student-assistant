@@ -8,15 +8,15 @@ const Color _textPrimary = Color(0xFF1D1B20);
 const Color _textSecondary = Color(0xCC1D1B20);
 
 const List<_NotificationItemData> _notificationItems = [
-  _NotificationItemData('CodeX', 'aktif'),
-  _NotificationItemData('Makalah', 'aktif'),
-  _NotificationItemData('Paraphrase', 'aktif'),
-  _NotificationItemData('Grammar', 'aktif'),
-  _NotificationItemData('Math', 'aktif'),
-  _NotificationItemData('Journal', 'aktif'),
-  _NotificationItemData('Summarize', 'aktif'),
-  _NotificationItemData('Cite', 'aktif'),
-  _NotificationItemData('Translate', 'aktif'),
+  _NotificationItemData('CodeX', 'Aktif'),
+  _NotificationItemData('Makalah', 'Aktif'),
+  _NotificationItemData('Paraphrase', 'Aktif'),
+  _NotificationItemData('Grammar', 'Aktif'),
+  _NotificationItemData('Math', 'Aktif'),
+  _NotificationItemData('Journal', 'Aktif'),
+  _NotificationItemData('Summarize', 'Aktif'),
+  _NotificationItemData('Cite', 'Aktif'),
+  _NotificationItemData('Translate', 'Aktif'),
 ];
 
 void main() {
