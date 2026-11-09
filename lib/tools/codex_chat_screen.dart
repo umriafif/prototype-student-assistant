@@ -339,36 +339,19 @@ class _BotAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: 18,
-      height: 20,
-      child: CustomPaint(painter: _BotAvatarPainter()),
-    );
+    return const SizedBox(child: AvatarIcon(size: 20));
   }
 }
 
-class _BotAvatarPainter extends CustomPainter {
-  const _BotAvatarPainter();
+class AvatarIcon extends StatelessWidget {
+  const AvatarIcon({required this.size});
+
+  final double size;
 
   @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = _dark;
-    for (final c in const [
-      (5.0, 4.0),
-      (13.0, 4.0),
-      (5.0, 12.0),
-      (13.0, 12.0),
-    ]) {
-      canvas.drawCircle(Offset(c.$1, c.$2), 3.1, paint);
-    }
-    canvas.drawRect(const Rect.fromLTWH(4.2, 4, 1.6, 8), paint);
-    canvas.drawRect(const Rect.fromLTWH(12.2, 4, 1.6, 8), paint);
-    canvas.drawRect(const Rect.fromLTWH(5, 3.2, 8, 1.6), paint);
-    canvas.drawRect(const Rect.fromLTWH(5, 11.2, 8, 1.6), paint);
+  Widget build(BuildContext context) {
+    return Image.asset('assets/logos/logo-app.png', width: size, height: size);
   }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
 // ==================== CODE CARD ====================
