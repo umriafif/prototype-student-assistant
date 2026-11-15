@@ -327,26 +327,13 @@ class _Hamburger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      key: const ValueKey('hamburger'),
-      onTap: () => Scaffold.of(context).openDrawer(),
-      behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        width: 22,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (var i = 0; i < 3; i++) ...[
-              Container(
-                height: 2.2,
-                decoration: BoxDecoration(
-                  color: _dark,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              if (i < 2) const SizedBox(height: 5),
-            ],
-          ],
-        ),
+      onTap: () {
+        Scaffold.of(context).openDrawer();
+      },
+      child: const SizedBox(
+        width: 40,
+        height: 40,
+        child: Icon(Icons.menu, size: 32, color: _dark),
       ),
     );
   }

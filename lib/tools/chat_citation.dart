@@ -76,26 +76,27 @@ class _CitationScreenState extends State<CitationScreen> {
                   horizontal: 24,
                   vertical: 20,
                 ),
-                child: Column(children: [
-                  _CiteDefaultView(
-                        profileController: _journalProfileController,
-                        selectedStyle: _selectedStyle,
-                        citationStyles: _citationStyles,
-                        isFileUploaded: _isFileUploaded,
-                        onUploadTap: _handleUploadFile,
-                        onStyleChanged: (val) {
-                          if (val != null) {
-                            setState(() => _selectedStyle = val);
-                          }
-                        },
-                        onCite: _handleCite,
+                child: Column(
+                  children: [
+                    _CiteDefaultView(
+                      profileController: _journalProfileController,
+                      selectedStyle: _selectedStyle,
+                      citationStyles: _citationStyles,
+                      isFileUploaded: _isFileUploaded,
+                      onUploadTap: _handleUploadFile,
+                      onStyleChanged: (val) {
+                        if (val != null) {
+                          setState(() => _selectedStyle = val);
+                        }
+                      },
+                      onCite: _handleCite,
                     ),
 
-                  _isCited
-                    ? _CiteResultView(onTryAgain: _handleTryAgain)
-                    : const SizedBox.shrink(),
+                    _isCited
+                        ? _CiteResultView(onTryAgain: _handleTryAgain)
+                        : const SizedBox.shrink(),
                   ],
-                ),  
+                ),
               ),
             ),
           ],
@@ -147,26 +148,13 @@ class _Hamburger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      key: const ValueKey('hamburger'),
-      onTap: () => Scaffold.of(context).openDrawer(),
-      behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        width: 22,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (var i = 0; i < 3; i++) ...[
-              Container(
-                height: 2.2,
-                decoration: BoxDecoration(
-                  color: _dark,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              if (i < 2) const SizedBox(height: 5),
-            ],
-          ],
-        ),
+      onTap: () {
+        Scaffold.of(context).openDrawer();
+      },
+      child: const SizedBox(
+        width: 40,
+        height: 40,
+        child: Icon(Icons.menu, size: 32, color: _dark),
       ),
     );
   }
@@ -267,7 +255,12 @@ class _CiteDefaultView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: const Color(0xFFDCDCE0)),
                 ),
-                padding: const EdgeInsets.only(left: 12, right: 6, top: 4, bottom: 4),
+                padding: const EdgeInsets.only(
+                  left: 12,
+                  right: 6,
+                  top: 4,
+                  bottom: 4,
+                ),
                 child: Row(
                   children: [
                     const Icon(Icons.search, size: 20, color: _placeholderGrey),
@@ -278,7 +271,10 @@ class _CiteDefaultView extends StatelessWidget {
                         style: const TextStyle(fontSize: 13.5, color: _dark),
                         decoration: const InputDecoration(
                           hintText: 'Search by ISBN or book title...',
-                          hintStyle: TextStyle(fontSize: 13, color: Color(0xFFA0A0A5)),
+                          hintStyle: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFFA0A0A5),
+                          ),
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(vertical: 8),
@@ -292,7 +288,10 @@ class _CiteDefaultView extends StatelessWidget {
                         backgroundColor: _dark,
                         foregroundColor: Colors.white,
                         elevation: 0,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -320,21 +319,30 @@ class _CiteDefaultView extends StatelessWidget {
                   onTap: onUploadTap,
                   borderRadius: BorderRadius.circular(6),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 4,
+                      vertical: 4,
+                    ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(
-                          isFileUploaded ? Icons.check_circle_outline : Icons.upload_file_rounded,
+                          isFileUploaded
+                              ? Icons.check_circle_outline
+                              : Icons.upload_file_rounded,
                           size: 16,
-                          color: isFileUploaded ? Colors.green : const Color(0xFF555555),
+                          color: isFileUploaded
+                              ? Colors.green
+                              : const Color(0xFF555555),
                         ),
                         const SizedBox(width: 6),
                         Text(
                           isFileUploaded ? 'file_document.pdf' : 'Upload PDF',
                           style: TextStyle(
                             fontSize: 13,
-                            color: isFileUploaded ? Colors.green : const Color(0xFF555555),
+                            color: isFileUploaded
+                                ? Colors.green
+                                : const Color(0xFF555555),
                             fontWeight: FontWeight.w500,
                           ),
                         ),

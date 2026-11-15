@@ -116,25 +116,24 @@ class _ParaphraseScreenState extends State<ParaphraseScreen> {
                   horizontal: 20,
                   vertical: 18,
                 ),
-                child:
-                    _isParaphrased
-                        ? _ParaphraseResultView(
-                          onTryAgain: _handleTryAgain,
-                          onCopy: _handleCopy,
-                        )
-                        : _ParaphraseDefaultView(
-                          controller: _textController,
-                          wordCount: _displayedWordCount,
-                          selectedLanguage: _selectedLanguage,
-                          onLanguageChanged: (val) {
-                            if (val != null) {
-                              setState(() => _selectedLanguage = val);
-                            }
-                          },
-                          onUploadTap: _handleUploadFile,
-                          onClear: _handleClear,
-                          onParaphrase: _handleParaphrase,
-                        ),
+                child: _isParaphrased
+                    ? _ParaphraseResultView(
+                        onTryAgain: _handleTryAgain,
+                        onCopy: _handleCopy,
+                      )
+                    : _ParaphraseDefaultView(
+                        controller: _textController,
+                        wordCount: _displayedWordCount,
+                        selectedLanguage: _selectedLanguage,
+                        onLanguageChanged: (val) {
+                          if (val != null) {
+                            setState(() => _selectedLanguage = val);
+                          }
+                        },
+                        onUploadTap: _handleUploadFile,
+                        onClear: _handleClear,
+                        onParaphrase: _handleParaphrase,
+                      ),
               ),
             ),
           ],
@@ -186,26 +185,13 @@ class _Hamburger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      key: const ValueKey('hamburger'),
-      onTap: () => Scaffold.of(context).openDrawer(),
-      behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        width: 22,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (var i = 0; i < 3; i++) ...[
-              Container(
-                height: 2.2,
-                decoration: BoxDecoration(
-                  color: _dark,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              if (i < 2) const SizedBox(height: 5),
-            ],
-          ],
-        ),
+      onTap: () {
+        Scaffold.of(context).openDrawer();
+      },
+      child: const SizedBox(
+        width: 40,
+        height: 40,
+        child: Icon(Icons.menu, size: 32, color: _dark),
       ),
     );
   }
@@ -345,16 +331,14 @@ class _ParaphraseDefaultView extends StatelessWidget {
                           color: Color(0xFF2C3E50),
                         ),
                         onChanged: onLanguageChanged,
-                        items:
-                            <String>[
-                              'English',
-                              'Indonesia',
-                            ].map<DropdownMenuItem<String>>((String value) {
+                        items: <String>['English', 'Indonesia']
+                            .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(value),
                               );
-                            }).toList(),
+                            })
+                            .toList(),
                       ),
                     ),
                   ),
@@ -426,10 +410,7 @@ class _ParaphraseDefaultView extends StatelessWidget {
 
 // ==================== RESULT VIEW ====================
 class _ParaphraseResultView extends StatelessWidget {
-  const _ParaphraseResultView({
-    required this.onTryAgain,
-    required this.onCopy,
-  });
+  const _ParaphraseResultView({required this.onTryAgain, required this.onCopy});
 
   final VoidCallback onTryAgain;
   final VoidCallback onCopy;
