@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../tool_menu_screen.dart';
+import '../signin_screen.dart';
 
 const _dark = Color(0xFF1C1C1E);
 const _border = Color(0xFFE8E8EA);
@@ -53,7 +53,7 @@ class SidebarWelcome extends StatelessWidget {
               label: 'More Tools+',
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const ToolMenuScreen()),
+                  MaterialPageRoute<void>(builder: (_) => const SignInScreen()),
                 );
               },
             ),
