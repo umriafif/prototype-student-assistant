@@ -47,15 +47,23 @@ class Sidebar extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 _CircleButton(
-                  icon: Icons.add,
+                  icon: Icons.clear,
                   size: 22,
-                  onTap: () => _placeholder(context, 'Fitur belum tersedia'),
+                  onTap: () => Navigator.of(context).pop(),
                 ),
               ],
             ),
             const SizedBox(height: 14),
-            _SearchPill(
-              onTap: () => _placeholder(context, 'Fitur belum tersedia'),
+            const TextField(
+              decoration: InputDecoration(
+                hintText: 'Search',
+                hintStyle: TextStyle(fontSize: 14, color: _greylight),
+                prefixIcon: Icon(Icons.search, size: 19, color: _greys),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(22)),
+                  borderSide: BorderSide(color: _border),
+                ),
+              ),
             ),
             const SizedBox(height: 18),
             _RowItem(
@@ -63,7 +71,9 @@ class Sidebar extends StatelessWidget {
               label: 'More Tools+',
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const ToolMenuScreen()),
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ToolMenuScreen(),
+                  ),
                 );
               },
             ),
@@ -85,7 +95,8 @@ class Sidebar extends StatelessWidget {
                     _ChatItem(
                       title: _sampleChats[i],
                       active: i == 0,
-                      onTap: () => _placeholder(context, 'Fitur belum tersedia'),
+                      onTap: () =>
+                          _placeholder(context, 'Fitur belum tersedia'),
                     ),
                 ],
               ),
@@ -94,12 +105,16 @@ class Sidebar extends StatelessWidget {
             _FooterRow(
               onProfile: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const ProfileScreen()),
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ProfileScreen(),
+                  ),
                 );
               },
               onSettings: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const ProfileScreen()),
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ProfileScreen(),
+                  ),
                 );
               },
             ),
@@ -131,39 +146,6 @@ class SidebarDrawer extends StatelessWidget {
         ),
       ),
       child: const Sidebar(),
-    );
-  }
-}
-
-class _SearchPill extends StatelessWidget {
-  const _SearchPill({required this.onTap});
-
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 42,
-        padding: const EdgeInsets.symmetric(horizontal: 14),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: _border),
-          borderRadius: BorderRadius.circular(22),
-        ),
-        child: Row(
-          children: const [
-            Expanded(
-              child: Text(
-                'Search',
-                style: TextStyle(fontSize: 14, color: _greylight),
-              ),
-            ),
-            Icon(Icons.search, size: 19, color: _greys),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -37,15 +37,23 @@ class SidebarWelcome extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 _CircleButton(
-                  icon: Icons.add,
+                  icon: Icons.clear,
                   size: 22,
-                  onTap: () => _placeholder(context, 'Fitur belum tersedia'),
+                  onTap: () => Navigator.of(context).pop(),
                 ),
               ],
             ),
             const SizedBox(height: 14),
-            _SearchPill(
-              onTap: () => _placeholder(context, 'Fitur belum tersedia'),
+            const TextField(
+              decoration: InputDecoration(
+                hintText: 'Search',
+                hintStyle: TextStyle(fontSize: 14, color: _greylight),
+                prefixIcon: Icon(Icons.search, size: 19, color: _greys),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(22)),
+                  borderSide: BorderSide(color: _border),
+                ),
+              ),
             ),
             const SizedBox(height: 18),
             _RowItem(

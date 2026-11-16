@@ -27,12 +27,6 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(message)));
-  }
-
   String? _validateEmail(String? value) {
     final email = value?.trim() ?? '';
     if (email.isEmpty) return 'Email wajib diisi';
@@ -48,13 +42,11 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void _onSignIn() {
     if (!_formKey.currentState!.validate()) return;
-    // _showSnackBar('Login berhasil (demo)');
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => ToolMenuScreen()),
       (Route<dynamic> route) => false, // false berarti hapus semua halaman lama
     );
-
   }
 
   void _openSignUp() {
@@ -195,12 +187,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   SizedBox(
                     height: 50,
                     child: OutlinedButton.icon(
-                      onPressed: () =>
-                          Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => ToolMenuScreen()),
-                          (Route<dynamic> route) => false, // false berarti hapus semua halaman lama
+                      onPressed: () => Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ToolMenuScreen(),
                         ),
+                        (Route<dynamic> route) =>
+                            false, // false berarti hapus semua halaman lama
+                      ),
                       icon: Image.asset(
                         'assets/icons/google-icon.png',
                         width: 32,
@@ -214,12 +208,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   SizedBox(
                     height: 50,
                     child: OutlinedButton.icon(
-                      onPressed: () =>
-                          Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => ToolMenuScreen()),
-                          (Route<dynamic> route) => false, // false berarti hapus semua halaman lama
+                      onPressed: () => Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ToolMenuScreen(),
                         ),
+                        (Route<dynamic> route) =>
+                            false, // false berarti hapus semua halaman lama
+                      ),
                       icon: Image.asset(
                         'assets/icons/facebook-icon.png',
                         width: 42,
