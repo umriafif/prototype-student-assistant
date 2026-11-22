@@ -82,12 +82,6 @@ class SidebarWelcome extends StatelessWidget {
   }
 }
 
-void _placeholder(BuildContext context, String message) {
-  ScaffoldMessenger.of(context)
-    ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(content: Text(message)));
-}
-
 class SidebarWelcomeDrawer extends StatelessWidget {
   const SidebarWelcomeDrawer({super.key});
 
@@ -103,39 +97,6 @@ class SidebarWelcomeDrawer extends StatelessWidget {
         ),
       ),
       child: const SidebarWelcome(),
-    );
-  }
-}
-
-class _SearchPill extends StatelessWidget {
-  const _SearchPill({required this.onTap});
-
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 42,
-        padding: const EdgeInsets.symmetric(horizontal: 14),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: _border),
-          borderRadius: BorderRadius.circular(22),
-        ),
-        child: Row(
-          children: const [
-            Expanded(
-              child: Text(
-                'Search',
-                style: TextStyle(fontSize: 14, color: _greylight),
-              ),
-            ),
-            Icon(Icons.search, size: 19, color: _greys),
-          ],
-        ),
-      ),
     );
   }
 }
