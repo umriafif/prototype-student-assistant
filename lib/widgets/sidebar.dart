@@ -18,8 +18,15 @@ const _sampleChats = [
   'Component naming advice',
 ];
 
-class Sidebar extends StatelessWidget {
+class Sidebar extends StatefulWidget {
   const Sidebar({super.key});
+
+  @override
+  State<Sidebar> createState() => _SidebarState();
+}
+
+class _SidebarState extends State<Sidebar> {
+  static int _activeChatIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +101,14 @@ class Sidebar extends StatelessWidget {
                   for (var i = 0; i < _sampleChats.length; i++)
                     _ChatItem(
                       title: _sampleChats[i],
-                      active: i == 0,
-                      onTap: () =>
-                          _placeholder(context, 'Fitur belum tersedia'),
+                      active: _activeChatIndex == i,
+                      onTap: () {
+                        setState(() {
+                          _activeChatIndex = i;
+                          // Navigator.of(context).pop();
+                          print('Selected chat: ${_sampleChats[i]}| Index: $i');
+                        });
+                      },
                     ),
                 ],
               ),
