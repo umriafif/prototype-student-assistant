@@ -105,8 +105,8 @@ class _SidebarState extends State<Sidebar> {
                       onTap: () {
                         setState(() {
                           _activeChatIndex = i;
-                          // Navigator.of(context).pop();
-                          print('Selected chat: ${_sampleChats[i]}| Index: $i');
+                          Navigator.of(context).pop();
+                          // print('Selected chat: ${_sampleChats[i]}| Index: $i');
                         });
                       },
                     ),
@@ -135,12 +135,6 @@ class _SidebarState extends State<Sidebar> {
       ),
     );
   }
-}
-
-void _placeholder(BuildContext context, String message) {
-  ScaffoldMessenger.of(context)
-    ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(content: Text(message)));
 }
 
 class SidebarDrawer extends StatelessWidget {
@@ -259,7 +253,7 @@ class _FooterRow extends StatelessWidget {
         const SizedBox(width: 10),
         const Expanded(
           child: Text(
-            'flippy@figma.com',
+            'user@gmail.com',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 13.5, color: _greys),
